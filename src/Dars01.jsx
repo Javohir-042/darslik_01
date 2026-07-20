@@ -939,16 +939,18 @@ const LL_OBJ = {
     </g>
   ),
   banana: ({ t }) => (
-    <g>
-      {/* orqadagi banan — semiz yarim oy, biroz to'qroq */}
-      <path d="M43 12 C40 44 58 68 90 70 C96 71 99 66 97 61 C74 60 60 42 58 14 C57 8 45 7 43 12 Z" fill={t || '#F0BE35'}/>
-      <ellipse cx="95" cy="65" rx="4" ry="3.2" fill="#8F5A2E"/>
-      <rect x="40" y="4" width="10" height="11" rx="3.5" fill="#8F5A2E"/>
-      {/* oldindagi banan — semiz, to'la, yorqin */}
-      <path d="M25 20 C20 55 40 84 78 87 C85 88 89 82 87 76 C58 74 42 52 40 22 C39 15 27 14 25 20 Z" fill={t || '#FFD34D'}/>
-      <ellipse cx="84" cy="81" rx="4.5" ry="3.6" fill="#8F5A2E"/>
-      <rect x="21" y="12" width="11" height="11" rx="3.5" fill="#8F5A2E"/>
-      <path d="M30 40 C32 60 46 76 64 81" stroke="#FFFFFF" strokeWidth="5" fill="none" strokeLinecap="round" opacity="0.35"/>
+    <g transform="translate(-3,3)">
+      {/* orqadagi banan — biroz to'qroq, oldingisining ortidan mo'ralaydi */}
+      <g transform="translate(17,-6)">
+        <rect x="20" y="10" width="10" height="12" rx="3.5" fill="#8F5A2E"/>
+        <path d="M25 16 C19 19 17 28 23 33 C29 60 49 80 78 84 C88 86 93 77 87 72 C61 68 43 49 39 22 C37 14 30 13 25 16 Z" fill={t || '#F0BE35'}/>
+        <ellipse cx="85" cy="79" rx="4" ry="3.3" fill="#8F5A2E"/>
+      </g>
+      {/* oldindagi banan — yorqin, yaltirash chizig'i bilan */}
+      <rect x="20" y="10" width="10" height="12" rx="3.5" fill="#8F5A2E"/>
+      <path d="M25 16 C19 19 17 28 23 33 C29 60 49 80 78 84 C88 86 93 77 87 72 C61 68 43 49 39 22 C37 14 30 13 25 16 Z" fill={t || '#FFD34D'}/>
+      <ellipse cx="85" cy="79" rx="4" ry="3.3" fill="#8F5A2E"/>
+      <path d="M29 34 C33 54 47 70 63 77" stroke="#FFFFFF" strokeWidth="5" fill="none" strokeLinecap="round" opacity="0.35"/>
     </g>
   ),
   basket: ({ t }) => (
@@ -3165,13 +3167,14 @@ html, body { margin: 0; padding: 0; }
 .fade-up { animation: d1fadeup 0.45s ease-out both; }
 
 /* sanoq kartalari: toza karta, faqat sanaladigan mahsulotlar — katta va aniq */
-.d1-count-art { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; container-type: size; }
+.d1-count-art { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
 .d1-count-items {
   position: relative; z-index: 1;
   display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
-  gap: 6cqmin; width: 88%;
-  font-size: 26cqmin; line-height: 1;
+  gap: clamp(6px, 1.2vh, 12px); width: 92%;
 }
+/* har bir sanaladigan mahsulot — karta enining ~uchdan bir qismi */
+.d1-count-items > span { width: 29%; aspect-ratio: 1; display: inline-flex; }
 
 /* ===== YUQORI PANEL: brend + yulduz-hisoblagich ===== */
 .d1-topbar {
@@ -3914,7 +3917,7 @@ html, body { margin: 0; padding: 0; }
 .d1-mem-scene { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; }
 .d1-mem-fruits { display: flex; align-items: flex-end; gap: clamp(8px, 2vw, 20px); z-index: 2; margin-bottom: -10px; }
 .d1-mem-fruit {
-  width: clamp(68px, 13vh, 104px);
+  width: clamp(84px, 16.5vh, 132px);
   filter: drop-shadow(0 6px 10px rgba(61, 58, 80, 0.28));
   animation: d1ccfloat 3.4s ease-in-out infinite;
 }
