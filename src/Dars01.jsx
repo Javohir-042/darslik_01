@@ -90,6 +90,16 @@ function sfxFanfare() {
     note(c, 0.72, 784,  0.7, 0.10, 'sine');
   } catch (e) { /* no-op */ }
 }
+// Qisqa salyut sadosi — sahifa to'liq yechilganda (markaziy yulduz bilan)
+function sfxSalute() {
+  try { const c = getCtx(); if (!c) return;
+    note(c, 0,    392, 0.12, 0.11, 'triangle');
+    note(c, 0.1,  523, 0.12, 0.12, 'triangle');
+    note(c, 0.2,  659, 0.14, 0.13, 'triangle');
+    note(c, 0.32, 784, 0.5,  0.15, 'triangle');
+    note(c, 0.32, 1047, 0.42, 0.07, 'sine');
+  } catch (e) { /* no-op */ }
+}
 // Bayramona musiqa (~5-6 soniya) — sertifikat sahifasi
 function sfxFestive() {
   try { const c = getCtx(); if (!c) return;
@@ -551,18 +561,49 @@ const LLDog = ({ c }) => (
   </g>
 );
 
+// Quyon — HAQIQIY quyon qiyofasi (quyon1-4.png suratlari asosida):
+// cho'kkalab o'tirgan, boshi ko'tarilgan, quloqlari orqaga engashgan,
+// katta yumaloq son, paxmoq dum. Tabiiy kulrang ranglar.
 const LLRabbit = ({ c }) => (
   <g>
-    <ellipse cx="78" cy="34" rx="14" ry="33" fill={c('#C9C5BE')} transform="rotate(-6 78 34)"/>
-    <ellipse cx="122" cy="34" rx="14" ry="33" fill={c('#C9C5BE')} transform="rotate(6 122 34)"/>
-    <ellipse cx="78" cy="40" rx="7" ry="22" fill={c('#F2B9CA')} transform="rotate(-6 78 40)"/>
-    <ellipse cx="122" cy="40" rx="7" ry="22" fill={c('#F2B9CA')} transform="rotate(6 122 40)"/>
-    <LLBody c={c} main="#C9C5BE" dark="#AEA89F" belly="#FFFFFF"/>
-    <circle cx="100" cy="96" r="56" fill={c('#C9C5BE')}/>
-    <LLFace c={c} y={96} brow="#8F887C"/>
-    <ellipse cx="100" cy="112" rx="6" ry="5" fill={c('#F08BAA')}/>
-    <circle cx="64" cy="116" r="9" fill={c('#F2B9CA')}/>
-    <circle cx="136" cy="116" r="9" fill={c('#F2B9CA')}/>
+    {/* quloqlar: orqaga engashgan, asosi boshda */}
+    <ellipse cx="128" cy="44" rx="11" ry="43" fill={c('#A69F94')} transform="rotate(-20 128 44)"/>
+    <ellipse cx="150" cy="40" rx="12" ry="46" fill={c('#BFBAB2')} transform="rotate(-9 150 40)"/>
+    <ellipse cx="150" cy="46" rx="6.5" ry="34" fill={c('#E8B4C4')} transform="rotate(-9 150 46)"/>
+    {/* paxmoq dum */}
+    <circle cx="26" cy="152" r="14" fill={c('#EDE9E2')}/>
+    {/* katta son-orqa qism */}
+    <ellipse cx="72" cy="160" rx="54" ry="60" fill={c('#BFBAB2')} transform="rotate(-8 72 160)"/>
+    {/* o'rta tana / bel */}
+    <ellipse cx="112" cy="158" rx="55" ry="47" fill={c('#BFBAB2')}/>
+    {/* son qavati — yumshoq quyuqroq */}
+    <circle cx="76" cy="174" r="34" fill={c('#ADA79C')}/>
+    {/* oldinga cho'zilgan orqa panja */}
+    <ellipse cx="102" cy="219" rx="27" ry="9" fill={c('#B2ACA2')}/>
+    {/* ko'krak */}
+    <ellipse cx="140" cy="182" rx="30" ry="34" fill={c('#BFBAB2')}/>
+    {/* qorin-ko'krak ochroq */}
+    <ellipse cx="133" cy="198" rx="15" ry="18" fill={c('#EDE9E2')}/>
+    {/* oldingi panjalar */}
+    <ellipse cx="140" cy="219" rx="13" ry="7" fill={c('#B2ACA2')}/>
+    <ellipse cx="160" cy="219" rx="12" ry="7" fill={c('#BFBAB2')}/>
+    {/* bosh: ko'tarilgan, o'ngga qaragan */}
+    <ellipse cx="146" cy="108" rx="34" ry="31" fill={c('#BFBAB2')} transform="rotate(8 146 108)"/>
+    {/* tumshuq */}
+    <circle cx="172" cy="120" r="15" fill={c('#BFBAB2')}/>
+    <ellipse cx="172" cy="126" rx="10" ry="7" fill={c('#EDE9E2')}/>
+    {/* ko'z */}
+    <circle cx="148" cy="102" r="7.5" fill={c('#2E3140')}/>
+    <circle cx="150.5" cy="99.5" r="2.4" fill={c('#FFFFFF')}/>
+    {/* burun + og'iz */}
+    <path d="M184 116 q4 2 2 6 l-5 -2 Z" fill={c('#D89AAC')}/>
+    <path d="M182 122 q-3 5 -9 5" stroke={c('#93897B')} strokeWidth="2.2" fill="none" strokeLinecap="round"/>
+    {/* mo'ylovlar */}
+    <g stroke={c('#93897B')} strokeWidth="1.7" strokeLinecap="round">
+      <line x1="176" y1="124" x2="196" y2="118"/>
+      <line x1="176" y1="128" x2="197" y2="128"/>
+      <line x1="174" y1="132" x2="194" y2="138"/>
+    </g>
   </g>
 );
 
@@ -744,14 +785,252 @@ const LLLion = ({ c }) => (
   </g>
 );
 
+// SHIRIN kuchukcha — bolalarbop uslub (katta bosh, yaltiroq ko'zlar,
+// tabassum, 4 oyoq, gajak dum). Render qilib vizual tasdiqlangan.
+const LLRealDog = () => (
+  <g>
+    <ellipse cx="105" cy="228" rx="80" ry="9" fill="rgba(60,45,20,0.15)"/>
+    {/* gajak dum */}
+    <path d="M38 150 C 22 142, 18 124, 30 116 C 40 110, 50 118, 46 128 C 44 122, 36 122, 34 128 C 32 136, 40 142, 50 142 Z" fill="#C98A4B"/>
+    {/* narigi tomon oyoqlari */}
+    <rect x="58" y="180" width="20" height="44" rx="10" fill="#B8793A"/>
+    <rect x="128" y="180" width="20" height="44" rx="10" fill="#B8793A"/>
+    {/* tana + qorincha */}
+    <ellipse cx="102" cy="172" rx="56" ry="42" fill="#D9A25F"/>
+    <ellipse cx="112" cy="184" rx="32" ry="24" fill="#F5DEB8"/>
+    {/* beri tomon oyoqlari + panjalar */}
+    <rect x="70" y="188" width="22" height="40" rx="11" fill="#D9A25F"/>
+    <rect x="116" y="188" width="22" height="40" rx="11" fill="#D9A25F"/>
+    <ellipse cx="81" cy="226" rx="14" ry="7" fill="#C98A4B"/>
+    <ellipse cx="127" cy="226" rx="14" ry="7" fill="#C98A4B"/>
+    <ellipse cx="68" cy="222" rx="12" ry="6" fill="#A5682F"/>
+    <ellipse cx="138" cy="222" rx="12" ry="6" fill="#A5682F"/>
+    {/* katta bosh */}
+    <circle cx="130" cy="92" r="52" fill="#D9A25F"/>
+    {/* shalpang quloqlar */}
+    <path d="M86 62 C 72 66, 66 88, 72 108 C 76 122, 88 126, 96 118 C 100 104, 98 80, 94 68 C 92 62, 89 61, 86 62 Z" fill="#A5682F"/>
+    <path d="M174 62 C 188 66, 194 88, 188 108 C 184 122, 172 126, 164 118 C 160 104, 162 80, 166 68 C 168 62, 171 61, 174 62 Z" fill="#A5682F"/>
+    {/* yuz krem qismi */}
+    <ellipse cx="130" cy="112" rx="26" ry="20" fill="#F5DEB8"/>
+    {/* katta yaltiroq ko'zlar */}
+    <circle cx="112" cy="86" r="11" fill="#3D3A50"/>
+    <circle cx="116" cy="82" r="4" fill="#FFFFFF"/>
+    <circle cx="109" cy="90" r="1.8" fill="#FFFFFF" opacity="0.7"/>
+    <circle cx="148" cy="86" r="11" fill="#3D3A50"/>
+    <circle cx="152" cy="82" r="4" fill="#FFFFFF"/>
+    <circle cx="145" cy="90" r="1.8" fill="#FFFFFF" opacity="0.7"/>
+    {/* burun + tabassum */}
+    <ellipse cx="130" cy="104" rx="8" ry="6" fill="#5C4033"/>
+    <path d="M130 110 L130 116" stroke="#5C4033" strokeWidth="3" strokeLinecap="round"/>
+    <path d="M118 118 Q124 124 130 118 Q136 124 142 118" stroke="#5C4033" strokeWidth="3.5" fill="none" strokeLinecap="round"/>
+    {/* yonoq qizilliklari + boshdagi dog' */}
+    <circle cx="96" cy="104" r="8" fill="#F2A9C4" opacity="0.6"/>
+    <circle cx="164" cy="104" r="8" fill="#F2A9C4" opacity="0.6"/>
+    <ellipse cx="148" cy="54" rx="13" ry="9" fill="#C98A4B" opacity="0.8"/>
+  </g>
+);
+
+// SHIRIN jo'ja — bolalarbop uslub (katta bosh, paxmoq patcha,
+// tabassumli tumshuqcha). Render qilib vizual tasdiqlangan.
+const LLRealDuck = () => (
+  <g>
+    <ellipse cx="100" cy="228" rx="66" ry="8" fill="rgba(90,70,15,0.15)"/>
+    {/* dumcha patchalari */}
+    <path d="M42 158 C 30 150, 28 136, 38 130 C 44 138, 48 146, 52 152 Z" fill="#F5B92E"/>
+    <path d="M50 148 C 42 138, 44 126, 54 124 C 56 132, 58 142, 60 148 Z" fill="#FFD24D"/>
+    {/* tana + qorincha */}
+    <ellipse cx="98" cy="172" rx="48" ry="40" fill="#FFD24D"/>
+    <ellipse cx="104" cy="184" rx="28" ry="22" fill="#FFF0C2"/>
+    {/* qanotcha */}
+    <ellipse cx="62" cy="168" rx="16" ry="24" fill="#F5B92E" transform="rotate(18 62 168)"/>
+    {/* oyoqlar + parda panjalar */}
+    <rect x="80" y="204" width="9" height="20" rx="4.5" fill="#FF9E2E"/>
+    <rect x="106" y="204" width="9" height="20" rx="4.5" fill="#FF9E2E"/>
+    <path d="M72 224 C 77 216, 90 216, 95 224 L 93 228 L 74 228 Z" fill="#FF9E2E"/>
+    <path d="M98 224 C 103 216, 116 216, 121 224 L 119 228 L 100 228 Z" fill="#FF9E2E"/>
+    {/* katta bosh + paxmoq patcha */}
+    <circle cx="112" cy="90" r="48" fill="#FFD24D"/>
+    <path d="M100 44 C 98 34, 106 28, 112 34 C 116 28, 124 32, 122 42 C 118 38, 112 40, 112 46 C 108 40, 102 40, 100 44 Z" fill="#F5B92E"/>
+    {/* katta yaltiroq ko'zlar */}
+    <circle cx="96" cy="86" r="10" fill="#3D3A50"/>
+    <circle cx="100" cy="82" r="3.6" fill="#FFFFFF"/>
+    <circle cx="93" cy="90" r="1.6" fill="#FFFFFF" opacity="0.7"/>
+    <circle cx="128" cy="86" r="10" fill="#3D3A50"/>
+    <circle cx="132" cy="82" r="3.6" fill="#FFFFFF"/>
+    <circle cx="125" cy="90" r="1.6" fill="#FFFFFF" opacity="0.7"/>
+    {/* tabassumli tumshuqcha */}
+    <path d="M100 102 Q112 96 124 102 Q118 112 112 112 Q106 112 100 102 Z" fill="#FF9E2E"/>
+    <path d="M104 108 Q112 114 120 108" stroke="#E8871F" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+    {/* yonoq qizilliklari */}
+    <circle cx="82" cy="102" r="7" fill="#FFB48A" opacity="0.7"/>
+    <circle cx="142" cy="102" r="7" fill="#FFB48A" opacity="0.7"/>
+  </g>
+);
+
+
+// SHIRIN mushukcha — bolalarbop uslub, 4 oyoqli (kuchukcha bilan bir
+// oilada). Render qilib vizual tasdiqlangan. 9-sahifa (tungi farq-top).
+const LLRealCat = () => (
+  <g>
+    <ellipse cx="105" cy="228" rx="80" ry="9" fill="rgba(40,30,10,0.2)"/>
+    {/* gajak dum */}
+    <path d="M40 160 C 24 150, 18 128, 32 118 C 44 110, 56 120, 50 132 C 46 126, 38 128, 38 136 C 38 146, 46 152, 56 150 Z" fill="#DE6E2C"/>
+    {/* narigi tomon oyoqlari */}
+    <rect x="58" y="180" width="20" height="44" rx="10" fill="#DE6E2C"/>
+    <rect x="128" y="180" width="20" height="44" rx="10" fill="#DE6E2C"/>
+    {/* tana + qorincha */}
+    <ellipse cx="102" cy="172" rx="56" ry="42" fill="#F1863F"/>
+    <ellipse cx="112" cy="184" rx="32" ry="24" fill="#FFC9A0"/>
+    {/* beri tomon oyoqlari + panjalar */}
+    <rect x="70" y="188" width="22" height="40" rx="11" fill="#F1863F"/>
+    <rect x="116" y="188" width="22" height="40" rx="11" fill="#F1863F"/>
+    <ellipse cx="81" cy="226" rx="14" ry="7" fill="#DE6E2C"/>
+    <ellipse cx="127" cy="226" rx="14" ry="7" fill="#DE6E2C"/>
+    <ellipse cx="68" cy="222" rx="12" ry="6" fill="#C25A1F"/>
+    <ellipse cx="138" cy="222" rx="12" ry="6" fill="#C25A1F"/>
+    {/* katta bosh + uchli quloqlar */}
+    <circle cx="130" cy="92" r="50" fill="#F1863F"/>
+    <path d="M92 58 L84 18 L122 40 Z" fill="#F1863F"/>
+    <path d="M168 58 L176 18 L138 40 Z" fill="#F1863F"/>
+    <path d="M96 52 L91 28 L114 42 Z" fill="#FFC9A0"/>
+    <path d="M164 52 L169 28 L146 42 Z" fill="#FFC9A0"/>
+    {/* peshona chiziqchalari */}
+    <g stroke="#DE6E2C" strokeWidth="4" strokeLinecap="round">
+      <line x1="122" y1="52" x2="122" y2="62"/>
+      <line x1="130" y1="50" x2="130" y2="62"/>
+      <line x1="138" y1="52" x2="138" y2="62"/>
+    </g>
+    {/* tumshuq oq qismi */}
+    <ellipse cx="130" cy="112" rx="24" ry="17" fill="#FFC9A0"/>
+    {/* katta yaltiroq ko'zlar */}
+    <circle cx="112" cy="88" r="11" fill="#3D3A50"/>
+    <circle cx="116" cy="84" r="4" fill="#FFFFFF"/>
+    <circle cx="109" cy="92" r="1.8" fill="#FFFFFF" opacity="0.7"/>
+    <circle cx="148" cy="88" r="11" fill="#3D3A50"/>
+    <circle cx="152" cy="84" r="4" fill="#FFFFFF"/>
+    <circle cx="145" cy="92" r="1.8" fill="#FFFFFF" opacity="0.7"/>
+    {/* pushti burun + og'iz */}
+    <path d="M124 104 L136 104 L130 111 Z" fill="#E88AA0"/>
+    <path d="M130 111 L130 116" stroke="#C25A1F" strokeWidth="3" strokeLinecap="round"/>
+    <path d="M118 118 Q124 124 130 118 Q136 124 142 118" stroke="#C25A1F" strokeWidth="3.5" fill="none" strokeLinecap="round"/>
+    {/* mo'ylovlar */}
+    <g stroke="#FFE5CE" strokeWidth="2.5" strokeLinecap="round" opacity="0.9">
+      <line x1="104" y1="106" x2="78" y2="100"/>
+      <line x1="104" y1="112" x2="76" y2="112"/>
+      <line x1="156" y1="106" x2="182" y2="100"/>
+      <line x1="156" y1="112" x2="184" y2="112"/>
+    </g>
+    {/* yonoq qizilliklari */}
+    <circle cx="98" cy="106" r="7" fill="#F2A9C4" opacity="0.55"/>
+    <circle cx="162" cy="106" r="7" fill="#F2A9C4" opacity="0.55"/>
+  </g>
+);
+
+
+// SHIRIN quyoncha — bolalarbop uslub, 4 oyoqli (kuchukcha oilasi).
+// Render qilib vizual tasdiqlangan. 10-sahifa (rang o'zgardi).
+const LLRealRabbit = () => (
+  <g transform="translate(4 0) scale(0.96)">
+    <ellipse cx="105" cy="238" rx="80" ry="9" fill="rgba(60,45,20,0.15)"/>
+    <circle cx="46" cy="178" r="15" fill="#EDE9E2"/>
+    <rect x="58" y="190" width="20" height="44" rx="10" fill="#A69F94"/>
+    <rect x="128" y="190" width="20" height="44" rx="10" fill="#A69F94"/>
+    <ellipse cx="102" cy="182" rx="56" ry="42" fill="#BFBAB2"/>
+    <ellipse cx="112" cy="194" rx="32" ry="24" fill="#EDE9E2"/>
+    <rect x="70" y="198" width="22" height="40" rx="11" fill="#BFBAB2"/>
+    <rect x="116" y="198" width="22" height="40" rx="11" fill="#BFBAB2"/>
+    <ellipse cx="81" cy="236" rx="14" ry="7" fill="#A69F94"/>
+    <ellipse cx="127" cy="236" rx="14" ry="7" fill="#A69F94"/>
+    <ellipse cx="68" cy="232" rx="12" ry="6" fill="#93897B"/>
+    <ellipse cx="138" cy="232" rx="12" ry="6" fill="#93897B"/>
+    {/* uzun quloqlar (ichi pushti) */}
+    <ellipse cx="108" cy="38" rx="14" ry="36" fill="#BFBAB2" transform="rotate(-8 108 38)"/>
+    <ellipse cx="152" cy="38" rx="14" ry="36" fill="#BFBAB2" transform="rotate(8 152 38)"/>
+    <ellipse cx="108" cy="42" rx="7.5" ry="26" fill="#EFB9C7" transform="rotate(-8 108 42)"/>
+    <ellipse cx="152" cy="42" rx="7.5" ry="26" fill="#EFB9C7" transform="rotate(8 152 42)"/>
+    <circle cx="130" cy="102" r="50" fill="#BFBAB2"/>
+    <ellipse cx="130" cy="122" rx="24" ry="17" fill="#EDE9E2"/>
+    <circle cx="112" cy="98" r="11" fill="#3D3A50"/>
+    <circle cx="116" cy="94" r="4" fill="#FFFFFF"/>
+    <circle cx="109" cy="102" r="1.8" fill="#FFFFFF" opacity="0.7"/>
+    <circle cx="148" cy="98" r="11" fill="#3D3A50"/>
+    <circle cx="152" cy="94" r="4" fill="#FFFFFF"/>
+    <circle cx="145" cy="102" r="1.8" fill="#FFFFFF" opacity="0.7"/>
+    {/* burun + og'iz + tishchalar */}
+    <path d="M124 114 L136 114 L130 121 Z" fill="#E88AA0"/>
+    <path d="M130 121 L130 126" stroke="#93897B" strokeWidth="3" strokeLinecap="round"/>
+    <path d="M118 128 Q124 134 130 128 Q136 134 142 128" stroke="#93897B" strokeWidth="3.5" fill="none" strokeLinecap="round"/>
+    <rect x="125" y="128" width="10" height="8" rx="2.5" fill="#FFFFFF"/>
+    <line x1="130" y1="128" x2="130" y2="136" stroke="#D9D2C4" strokeWidth="1.5"/>
+    <g stroke="#D9D2C4" strokeWidth="2.5" strokeLinecap="round" opacity="0.9">
+      <line x1="104" y1="116" x2="80" y2="110"/>
+      <line x1="104" y1="122" x2="78" y2="122"/>
+      <line x1="156" y1="116" x2="180" y2="110"/>
+      <line x1="156" y1="122" x2="182" y2="122"/>
+    </g>
+    <circle cx="98" cy="116" r="7" fill="#F2A9C4" opacity="0.55"/>
+    <circle cx="162" cy="116" r="7" fill="#F2A9C4" opacity="0.55"/>
+  </g>
+);
+
+// SHIRIN sigircha — bolalarbop uslub, 4 oyoqli, shox-tuyoqli.
+// Render qilib vizual tasdiqlangan. 10-sahifa (rang o'zgardi).
+const LLRealCow = () => (
+  <g transform="translate(4 0) scale(0.96)">
+    <ellipse cx="105" cy="238" rx="80" ry="9" fill="rgba(60,45,20,0.15)"/>
+    {/* dum popukli */}
+    <path d="M40 170 C 28 164, 24 150, 32 142 L 38 148 C 34 154, 36 160, 44 164 Z" fill="#E2DACB"/>
+    <circle cx="33" cy="142" r="7" fill="#6B4A33"/>
+    <rect x="58" y="190" width="20" height="44" rx="10" fill="#E2DACB"/>
+    <rect x="128" y="190" width="20" height="44" rx="10" fill="#E2DACB"/>
+    <ellipse cx="102" cy="182" rx="56" ry="42" fill="#F7F3EA"/>
+    <ellipse cx="112" cy="194" rx="32" ry="24" fill="#FFFFFF"/>
+    {/* dog'lar */}
+    <ellipse cx="70" cy="162" rx="16" ry="12" fill="#6B4A33" opacity="0.9"/>
+    <ellipse cx="128" cy="158" rx="12" ry="9" fill="#6B4A33" opacity="0.9"/>
+    <rect x="70" y="198" width="22" height="40" rx="11" fill="#F7F3EA"/>
+    <rect x="116" y="198" width="22" height="40" rx="11" fill="#F7F3EA"/>
+    {/* tuyoqlar */}
+    <ellipse cx="81" cy="236" rx="14" ry="7" fill="#6B4A33"/>
+    <ellipse cx="127" cy="236" rx="14" ry="7" fill="#6B4A33"/>
+    <ellipse cx="68" cy="232" rx="12" ry="6" fill="#54382B"/>
+    <ellipse cx="138" cy="232" rx="12" ry="6" fill="#54382B"/>
+    {/* shoxchalar + yon quloqlar */}
+    <path d="M100 48 C 94 36, 98 26, 108 26 C 106 34, 106 42, 108 50 Z" fill="#C9B08E"/>
+    <path d="M160 48 C 166 36, 162 26, 152 26 C 154 34, 154 42, 152 50 Z" fill="#C9B08E"/>
+    <ellipse cx="82" cy="88" rx="16" ry="10" fill="#E2DACB" transform="rotate(-18 82 88)"/>
+    <ellipse cx="178" cy="88" rx="16" ry="10" fill="#E2DACB" transform="rotate(18 178 88)"/>
+    <circle cx="130" cy="94" r="50" fill="#F7F3EA"/>
+    {/* peshona kokili + bosh dog'i */}
+    <ellipse cx="130" cy="52" rx="16" ry="9" fill="#6B4A33"/>
+    <ellipse cx="98" cy="70" rx="13" ry="10" fill="#6B4A33" opacity="0.9"/>
+    <circle cx="112" cy="88" r="11" fill="#3D3A50"/>
+    <circle cx="116" cy="84" r="4" fill="#FFFFFF"/>
+    <circle cx="109" cy="92" r="1.8" fill="#FFFFFF" opacity="0.7"/>
+    <circle cx="148" cy="88" r="11" fill="#3D3A50"/>
+    <circle cx="152" cy="84" r="4" fill="#FFFFFF"/>
+    <circle cx="145" cy="92" r="1.8" fill="#FFFFFF" opacity="0.7"/>
+    {/* katta pushti tumshuq */}
+    <ellipse cx="130" cy="118" rx="27" ry="16" fill="#F2B8C6"/>
+    <ellipse cx="120" cy="118" rx="4.5" ry="6" fill="#D67F98"/>
+    <ellipse cx="140" cy="118" rx="4.5" ry="6" fill="#D67F98"/>
+    <path d="M122 130 Q130 135 138 130" stroke="#D67F98" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="96" cy="106" r="7" fill="#F2A9C4" opacity="0.5"/>
+    <circle cx="164" cy="106" r="7" fill="#F2A9C4" opacity="0.5"/>
+  </g>
+);
+
 const LL_KINDS = {
   cat: LLCat, dog: LLDog, rabbit: LLRabbit, duck: LLDuck, rooster: LLRooster,
   cow: LLCow, pig: LLPig, horse: LLHorse, sheep: LLSheep, turtle: LLTurtle,
   elephant: LLElephant, giraffe: LLGiraffe, monkey: LLMonkey, lion: LLLion,
+  realDog: LLRealDog, realDuck: LLRealDuck, realCat: LLRealCat,
+  realRabbit: LLRealRabbit, realCow: LLRealCow,
 };
-// kind -> jonivor; sil=true — soya (hamma qism bir xil quyuq rang)
-const LLCritter = ({ kind, sil = false }) => {
-  const c = (col) => (sil ? LL_SIL : col);
+// kind -> jonivor; sil=true — soya (hamma qism bir xil quyuq rang);
+// silColor — soya rangini almashtirish (sahifaga mos yumshoq tus uchun)
+const LLCritter = ({ kind, sil = false, silColor = LL_SIL }) => {
+  const c = (col) => (sil ? silColor : col);
   const K = LL_KINDS[kind] || LLCat;
   return (
     <svg viewBox="0 0 200 240" className="d1-llc" aria-hidden="true">
@@ -790,18 +1069,47 @@ const LLJungleBg = () => (
 // t — ixtiyoriy asosiy rang: rang-parametrik shakllar shu rangga
 // bo'yaladi, berilmasa o'z odatiy rangida chiziladi.
 // ============================================================
-const LLBearIcon = ({ t }) => (
-  <g>
-    <circle cx="30" cy="24" r="12" fill={t || '#C98A4B'}/><circle cx="70" cy="24" r="12" fill={t || '#C98A4B'}/>
-    <circle cx="30" cy="24" r="6" fill="#E8B888"/><circle cx="70" cy="24" r="6" fill="#E8B888"/>
-    <ellipse cx="50" cy="74" rx="26" ry="22" fill={t || '#C98A4B'}/>
-    <ellipse cx="50" cy="80" rx="14" ry="12" fill="#E8B888"/>
-    <circle cx="50" cy="38" r="26" fill={t || '#C98A4B'}/>
-    <ellipse cx="50" cy="47" rx="12" ry="9" fill="#E8B888"/>
-    <circle cx="41" cy="34" r="4" fill="#2E3140"/><circle cx="59" cy="34" r="4" fill="#2E3140"/>
-    <ellipse cx="50" cy="44" rx="4.5" ry="3.5" fill="#2E3140"/>
-  </g>
-);
+// rangni biroz to'qlashtirish — ayiqcha qo'l-oyoqlari tanadan ajralib
+// turishi uchun (tint berilganda ham mos tusda bo'ladi)
+const darkenHex = (hex, f = 0.88) => {
+  const m = /^#?([0-9a-f]{6})$/i.exec(hex || '');
+  if (!m) return hex;
+  const n = parseInt(m[1], 16);
+  const r = Math.round(((n >> 16) & 255) * f);
+  const g = Math.round(((n >> 8) & 255) * f);
+  const b = Math.round((n & 255) * f);
+  return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}`;
+};
+
+const LLBearIcon = ({ t }) => {
+  const limb = t ? darkenHex(t) : '#B8793A';
+  return (
+    <g>
+      <circle cx="30" cy="24" r="12" fill={t || '#C98A4B'}/><circle cx="70" cy="24" r="12" fill={t || '#C98A4B'}/>
+      <circle cx="30" cy="24" r="6" fill="#E8B888"/><circle cx="70" cy="24" r="6" fill="#E8B888"/>
+      {/* uzun dumaloq qo'llar — yelkadan pastga osilib turadi */}
+      <ellipse cx="25" cy="68" rx="6.5" ry="16" fill={limb} transform="rotate(14 25 68)"/>
+      <ellipse cx="75" cy="68" rx="6.5" ry="16" fill={limb} transform="rotate(-14 75 68)"/>
+      {/* qo'l kaftchalari */}
+      <circle cx="21" cy="82" r="5" fill="#E8B888"/>
+      <circle cx="79" cy="82" r="5" fill="#E8B888"/>
+      {/* oyoqlar — ayiqnikidek: tik oyoq + oldga qaragan katta tovon */}
+      <ellipse cx="37" cy="82" rx="8" ry="13" fill={limb}/>
+      <ellipse cx="63" cy="82" rx="8" ry="13" fill={limb}/>
+      <ellipse cx="36" cy="93" rx="10" ry="6" fill={limb}/>
+      <ellipse cx="64" cy="93" rx="10" ry="6" fill={limb}/>
+      <ellipse cx="50" cy="70" rx="25" ry="21" fill={t || '#C98A4B'}/>
+      <ellipse cx="50" cy="76" rx="13" ry="11" fill="#E8B888"/>
+      {/* tovon yostiqchalari */}
+      <ellipse cx="36" cy="93" rx="6.5" ry="3.8" fill="#E8B888"/>
+      <ellipse cx="64" cy="93" rx="6.5" ry="3.8" fill="#E8B888"/>
+      <circle cx="50" cy="38" r="26" fill={t || '#C98A4B'}/>
+      <ellipse cx="50" cy="47" rx="12" ry="9" fill="#E8B888"/>
+      <circle cx="41" cy="34" r="4" fill="#2E3140"/><circle cx="59" cy="34" r="4" fill="#2E3140"/>
+      <ellipse cx="50" cy="44" rx="4.5" ry="3.5" fill="#2E3140"/>
+    </g>
+  );
+};
 const LLFishArt = ({ main, dark, deco }) => (
   <g>
     <path d="M70 50 L92 32 q4 18 0 36 Z" fill={dark}/>
@@ -938,19 +1246,53 @@ const LL_OBJ = {
       <circle cx="46" cy="30" r="4" fill="#FFFFFF" opacity="0.4"/>
     </g>
   ),
+  rubberduck: () => (
+    <g>
+      {/* REZINA O'RDAKCHA — vanna o'yinchog'i: do'mboq tana, yaltirash */}
+      <path d="M24 60 C 12 52, 14 38, 26 36 C 28 44, 32 52, 38 57 Z" fill="#FFCE2E"/>
+      <ellipse cx="52" cy="66" rx="34" ry="23" fill="#FFCE2E"/>
+      <path d="M36 66 C 44 59, 56 59, 63 66" stroke="#E8A21F" strokeWidth="3.5" fill="none" strokeLinecap="round"/>
+      <circle cx="66" cy="33" r="19" fill="#FFCE2E"/>
+      <path d="M83 30 C 93 29, 98 33, 98 38 C 98 42, 93 45, 84 44 C 81 40, 81 34, 83 30 Z" fill="#FF9E2E"/>
+      <path d="M84 37 q 6 2 12 0" stroke="#E8871F" strokeWidth="2" fill="none" strokeLinecap="round"/>
+      <circle cx="71" cy="27" r="4.5" fill="#2E3140"/>
+      <circle cx="72.5" cy="25.5" r="1.6" fill="#FFFFFF"/>
+      <ellipse cx="40" cy="58" rx="10" ry="6" fill="#FFF3C4" opacity="0.85" transform="rotate(-15 40 58)"/>
+      <circle cx="59" cy="26" r="5.5" fill="#FFF3C4" opacity="0.85"/>
+      <ellipse cx="52" cy="90" rx="30" ry="4" fill="rgba(160,110,20,0.18)"/>
+    </g>
+  ),
+  comet: () => (
+    <g>
+      {/* KOMETA — yorqin bosh + ikki qavat dum + uchqunlar */}
+      <path d="M62 54 C 42 64, 22 78, 5 93 C 28 86, 48 74, 66 61 Z" fill="#8FD4FF" opacity="0.85"/>
+      <path d="M64 46 C 46 56, 28 70, 13 84 C 34 75, 52 64, 68 55 Z" fill="#FFE9A8" opacity="0.9"/>
+      <circle cx="68" cy="40" r="17" fill="#FFD34D"/>
+      <circle cx="63" cy="35" r="6" fill="#FFF3C4"/>
+      <circle cx="30" cy="62" r="2.5" fill="#FFF3C4"/>
+      <circle cx="20" cy="78" r="2" fill="#8FD4FF"/>
+      <circle cx="44" cy="68" r="2" fill="#FFD34D"/>
+    </g>
+  ),
   banana: ({ t }) => (
-    <g transform="translate(-3,3)">
-      {/* orqadagi banan — biroz to'qroq, oldingisining ortidan mo'ralaydi */}
-      <g transform="translate(17,-6)">
-        <rect x="20" y="10" width="10" height="12" rx="3.5" fill="#8F5A2E"/>
-        <path d="M25 16 C19 19 17 28 23 33 C29 60 49 80 78 84 C88 86 93 77 87 72 C61 68 43 49 39 22 C37 14 30 13 25 16 Z" fill={t || '#F0BE35'}/>
-        <ellipse cx="85" cy="79" rx="4" ry="3.3" fill="#8F5A2E"/>
-      </g>
-      {/* oldindagi banan — yorqin, yaltirash chizig'i bilan */}
-      <rect x="20" y="10" width="10" height="12" rx="3.5" fill="#8F5A2E"/>
-      <path d="M25 16 C19 19 17 28 23 33 C29 60 49 80 78 84 C88 86 93 77 87 72 C61 68 43 49 39 22 C37 14 30 13 25 16 Z" fill={t || '#FFD34D'}/>
-      <ellipse cx="85" cy="79" rx="4" ry="3.3" fill="#8F5A2E"/>
-      <path d="M29 34 C33 54 47 70 63 77" stroke="#FFFFFF" strokeWidth="5" fill="none" strokeLinecap="round" opacity="0.35"/>
+    <g>
+      {/* pishgan BOSH banan: uchtasi tepada bitta bandga yopishgan */}
+      {/* orqa banan (eng to'q) */}
+      <path d="M 70 16 C 64 32, 62 56, 70 82 C 73 90, 84 88, 84 80 C 78 58, 80 40, 85 26 Z" fill={t ? darkenHex(t, 0.86) : '#E8AF2E'}/>
+      <ellipse cx="76" cy="84" rx="4" ry="3.2" fill="#8F5A2E" transform="rotate(20 76 84)"/>
+      {/* o'rta banan */}
+      <path d="M 63 15 C 50 30, 43 56, 50 84 C 53 93, 64 92, 65 83 C 61 60, 66 38, 76 24 Z" fill={t ? darkenHex(t, 0.94) : '#F5C043'}/>
+      <ellipse cx="56" cy="87" rx="4.5" ry="3.4" fill="#8F5A2E" transform="rotate(28 56 87)"/>
+      {/* old banan (eng yorqin) */}
+      <path d="M 56 16 C 35 25, 21 50, 26 78 C 28 88, 40 89, 43 80 C 43 57, 52 37, 66 27 Z" fill={t || '#FFD34D'}/>
+      <ellipse cx="34" cy="83" rx="4.8" ry="3.6" fill="#8F5A2E" transform="rotate(40 34 83)"/>
+      {/* qirra chizig'i + yaltirash */}
+      <path d="M 34 40 C 28 52, 27 64, 32 75" stroke="#F0B429" strokeWidth="2.5" fill="none" strokeLinecap="round" opacity="0.7"/>
+      <path d="M 44 36 C 37 49, 36 62, 39 73" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.4"/>
+      {/* umumiy band — tepada birlashtiruvchi */}
+      <path d="M 53 20 C 55 11, 75 9, 81 18 C 83 22, 81 25, 77 26 L 61 27 C 55 26, 52 24, 53 20 Z" fill="#A5682F"/>
+      <rect x="63" y="5" width="9" height="11" rx="4" fill="#8F5A2E"/>
+      <path d="M 57 21 C 63 17, 72 17, 77 21" stroke="#8F5A2E" strokeWidth="2" fill="none" strokeLinecap="round" opacity="0.6"/>
     </g>
   ),
   basket: ({ t }) => (
@@ -1240,15 +1582,62 @@ const GoldStar = () => (
       fill="#FFD34D" stroke="#E8A21F" strokeWidth="4" strokeLinejoin="round"/>
   </svg>
 );
+
+// ============================================================
+// SAHIFA YECHILDI BAYRAMI — katta oltin yulduz ekran MARKAZIGA
+// uchib keladi, atrofida salyut portlashlari + "Barakalla!" yozuvi.
+// ~2.4 s davom etib o'zi so'nadi; bosishga xalaqit bermaydi
+// (pointer-events yo'q), bola "Keyingi" ni o'zi bosadi.
+// ============================================================
+// 3 raketa: pastdan uchib chiqib, belgilangan nuqtada portlaydi.
+// x/y — portlash nuqtasi (markazga nisbatan), d — otilish kechikishi.
+const CELEB_FW = [
+  { x: 0,    y: -60, d: 0,    c: '#FFD34D' },
+  { x: -175, y: -15, d: 0.4,  c: '#FF5A8A' },
+  { x: 180,  y: -40, d: 0.7,  c: '#5AC8FA' },
+];
+const CELEB_FLIGHT = 0.55;   // raketaning uchish vaqti (s)
+const CelebrationFx = () => (
+  <div className="d1-celeb" aria-hidden="true">
+    <div className="d1-celeb-inner">
+      {CELEB_FW.map((f, i) => (
+        <React.Fragment key={i}>
+          {/* raketa — yorug' iz bilan tepaga uchadi */}
+          <span className="d1-celeb-rocket"
+            style={{ left: f.x, top: f.y, background: f.c, '--glow': f.c, animationDelay: `${f.d}s` }}/>
+          {/* portlash chaqnashi */}
+          <span className="d1-celeb-flash" style={{ left: f.x, top: f.y, animationDelay: `${f.d + CELEB_FLIGHT}s` }}/>
+          {/* uchqunlar — ikki halqa bo'lib KATTA yoyiladi, so'ng pastga sochiladi */}
+          <span className="d1-celeb-burst" style={{ left: f.x, top: f.y }}>
+            {[6.2, 3.9].map((mult, ring) =>
+              BURST.map(({ a, d, cl }, j) => {
+                const rad = ((a + ring * 15) * Math.PI) / 180;
+                return (
+                  <i key={`${ring}-${j}`} style={{
+                    background: j % 3 === 0 ? f.c : cl,
+                    '--bx': `${(Math.cos(rad) * d * mult).toFixed(1)}px`,
+                    '--by': `${(Math.sin(rad) * d * mult).toFixed(1)}px`,
+                    animationDelay: `${f.d + CELEB_FLIGHT + ring * 0.06 + (j % 4) * 0.02}s`,
+                  }}/>
+                );
+              })
+            )}
+          </span>
+        </React.Fragment>
+      ))}
+      <span className="d1-celeb-txt">Barakalla!</span>
+    </div>
+  </div>
+);
 // ============================================================
 // YULDUZ PARVOZI API — GamePage to'g'ri javob nuqtasini ildizga uzatadi
 // ============================================================
 const FlightCtx = React.createContext({ onCorrect: () => {} });
 const useFlightApi = () => React.useContext(FlightCtx);
 // ============================================================
-// SAHIFA 2 — Format 3: SOYA TOPISH (mushukcha)
-// Oq karta ichida rangli mushukcha, pastda 3 ta qora siluet.
-// Faqat bittasi aniq mos: qolganlarida quloq yoki dum farqli.
+// SAHIFA 2 — Format 3: SOYA TOPISH (o'tloqdagi quyon)
+// Yashil o'tloq taxtasi ustida yarim-realistik quyon, pastda yashil
+// ramkali oq kartalarda 3 ta qora soya: mushuk, xo'roz, quyon.
 // ============================================================
 const SHADOW_CAT_VOICE = "Do'stimizning soyasi qaysi? Mos soyani topib bosing!";
 
@@ -1489,13 +1878,445 @@ const ShadowGamePage = ({ cfg, onBack, onNext }) => {
   );
 };
 
-const SHADOW_CFG_CAT = {
-  voice: SHADOW_CAT_VOICE,
-  // 2-sahifa DOIM BIR XIL (quyon.png dagi sahna): qahramon — quyon,
-  // soyalar chapdan-o'ngga: mushuk, xo'roz, quyon. Aralashtirish YO'Q.
-  fixed: { hero: 'rabbit', options: ['cat', 'rooster', 'rabbit'] },
-  // LogicLike ko'rinishi: yashil o'rmon foni + qalin yashil plitkalar
-  ll: true,
+// ============================================================
+// 2-SAHIFA (yangi dizayn) — O'TLOQDAGI QUYON:
+//  · fon: dumaloq yashil o'tloq taxtasi, burchaklarda yumshoq barglar,
+//    tepadan iliq yorug'lik; ramka tashqarisi sariq→ko'k gradient (d1-root);
+//  · markazda yarim-realistik quyon (kulrang-jigarrang jun, pushti quloq
+//    ichi, yiltiroq ko'z, mo'ylov, oppoq paxmoq dum, tabiiy o'tirish);
+//  · pastda yashil ramkali OQ kartalar ichida yassi QORA soyalar:
+//    mushuk, xo'roz, quyon; kartalar orqasida xira slot konturlari.
+// Mexanika o'zgarmagan: to'g'ri → konfetti + yulduz; xato → silkinish.
+// ============================================================
+
+// O'tloq foni — yumshoq yashil gradient, do'ngliklar, burchak barglari,
+// mayda gullar va o't tutamlari (bosib bo'lmaydi, .d1-theme qatlami)
+const MeadowBg = () => (
+  <div className="d1-theme d1-meadow-bg" aria-hidden="true">
+    <svg viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="d1mdSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#DFF3C2"/>
+          <stop offset="0.5" stopColor="#B7E18C"/>
+          <stop offset="1" stopColor="#8FCB61"/>
+        </linearGradient>
+      </defs>
+      <rect width="1000" height="620" fill="url(#d1mdSky)"/>
+      {/* tepadan tushayotgan iliq yorug'lik */}
+      <ellipse cx="500" cy="40" rx="460" ry="170" fill="#FFF6D9" opacity="0.4"/>
+      <ellipse cx="500" cy="10" rx="300" ry="110" fill="#FFFDF2" opacity="0.35"/>
+      {/* orqa do'ngliklar */}
+      <path d="M-20 470 Q180 400 420 455 Q700 510 1020 440 L1020 640 L-20 640 Z" fill="#9ED573" opacity="0.85"/>
+      <path d="M-20 530 Q260 470 520 520 Q780 565 1020 515 L1020 640 L-20 640 Z" fill="#82C155"/>
+      {/* yumshoq oq bulutchalar — o'ng-chapga ohista suzadi */}
+      <g className="d1-md-cloud" fill="#FFFFFF" opacity="0.85">
+        <ellipse cx="290" cy="92" rx="62" ry="20"/>
+        <circle cx="262" cy="80" r="21"/><circle cx="300" cy="72" r="26"/><circle cx="334" cy="82" r="18"/>
+      </g>
+      <g className="d1-md-cloud slow" fill="#FFFFFF" opacity="0.85">
+        <ellipse cx="742" cy="118" rx="52" ry="17"/>
+        <circle cx="720" cy="108" r="17"/><circle cx="752" cy="100" r="21"/><circle cx="778" cy="110" r="14"/>
+      </g>
+      {/* CHAP mevali daraxt — o'tloq chetida */}
+      <g>
+        <ellipse cx="132" cy="466" rx="58" ry="10" fill="rgba(47, 84, 28, 0.18)"/>
+        <rect x="119" y="372" width="26" height="92" rx="12" fill="#8F5A2E"/>
+        <path d="M132 392 q-16 -18 -34 -22" stroke="#8F5A2E" strokeWidth="10" fill="none" strokeLinecap="round"/>
+        <circle cx="132" cy="316" r="58" fill="#4E9C48"/>
+        <circle cx="92" cy="344" r="38" fill="#43A047"/>
+        <circle cx="172" cy="344" r="38" fill="#43A047"/>
+        <circle cx="112" cy="296" r="10" fill="#A8D96A" opacity="0.75"/>
+        <circle cx="154" cy="326" r="7" fill="#A8D96A" opacity="0.65"/>
+        <circle cx="104" cy="334" r="8" fill="#FF5A4E"/>
+        <circle cx="150" cy="304" r="8" fill="#FF5A4E"/>
+        <circle cx="132" cy="352" r="8" fill="#FF5A4E"/>
+      </g>
+      {/* O'NG mevali daraxt */}
+      <g>
+        <ellipse cx="868" cy="466" rx="58" ry="10" fill="rgba(47, 84, 28, 0.18)"/>
+        <rect x="855" y="372" width="26" height="92" rx="12" fill="#8F5A2E"/>
+        <path d="M868 392 q16 -18 34 -22" stroke="#8F5A2E" strokeWidth="10" fill="none" strokeLinecap="round"/>
+        <circle cx="868" cy="316" r="58" fill="#4E9C48"/>
+        <circle cx="828" cy="344" r="38" fill="#43A047"/>
+        <circle cx="908" cy="344" r="38" fill="#43A047"/>
+        <circle cx="888" cy="296" r="10" fill="#A8D96A" opacity="0.75"/>
+        <circle cx="846" cy="326" r="7" fill="#A8D96A" opacity="0.65"/>
+        <circle cx="896" cy="334" r="8" fill="#FF5A4E"/>
+        <circle cx="850" cy="304" r="8" fill="#FF5A4E"/>
+        <circle cx="868" cy="352" r="8" fill="#FF5A4E"/>
+      </g>
+      {/* butalar — do'ngliklar ustida */}
+      <g fill="#6FB247">
+        <ellipse cx="262" cy="472" rx="44" ry="20"/>
+        <ellipse cx="300" cy="466" rx="30" ry="15"/>
+        <ellipse cx="742" cy="478" rx="40" ry="18"/>
+        <ellipse cx="706" cy="472" rx="26" ry="13"/>
+      </g>
+      {/* kapalaklar — sokin suzib, qanot qoqib turadi */}
+      <g transform="translate(330 205) rotate(-14)">
+        <g className="d1-md-btf">
+          <ellipse className="d1-btf-wl" cx="-8" cy="0" rx="10" ry="14" fill="#F2A9C4"/>
+          <ellipse className="d1-btf-wr" cx="8" cy="0" rx="10" ry="14" fill="#B48CE0"/>
+          <rect x="-2.5" y="-11" width="5" height="22" rx="2.5" fill="#5C4033"/>
+        </g>
+      </g>
+      <g transform="translate(688 180) rotate(12)">
+        <g className="d1-md-btf b2">
+          <ellipse className="d1-btf-wl" cx="-7" cy="0" rx="9" ry="12" fill="#FFD34D"/>
+          <ellipse className="d1-btf-wr" cx="7" cy="0" rx="9" ry="12" fill="#F2A9C4"/>
+          <rect x="-2" y="-9" width="4" height="18" rx="2" fill="#5C4033"/>
+        </g>
+      </g>
+      {/* pastki burchak barglari (tepadagi katta barglar olib tashlangan) */}
+      <g fill="#6FB247" opacity="0.55">
+        <path d="M-30 640 Q40 500 170 540 Q90 630 -30 640 Z"/>
+        <path d="M1030 640 Q960 500 830 540 Q910 630 1030 640 Z"/>
+      </g>
+      <g stroke="#5E9C3A" strokeWidth="5" fill="none" opacity="0.4" strokeLinecap="round">
+        <path d="M30 615 Q80 560 140 545"/>
+        <path d="M970 615 Q920 560 860 545"/>
+      </g>
+      {/* o't tutamlari */}
+      <g stroke="#5E9C3A" strokeWidth="6" fill="none" strokeLinecap="round" opacity="0.7">
+        <path d="M150 585 q-4 -18 2 -30 M162 585 q2 -16 12 -24 M140 585 q-10 -12 -18 -16"/>
+        <path d="M846 590 q-4 -18 2 -30 M858 590 q2 -16 12 -24 M836 590 q-10 -12 -18 -16"/>
+        <path d="M505 600 q-4 -14 2 -24 M516 600 q3 -12 10 -18"/>
+      </g>
+      {/* mayda gullar */}
+      <g>
+        <circle cx="230" cy="560" r="9" fill="#FFFFFF" opacity="0.9"/><circle cx="230" cy="560" r="4" fill="#FFD34D"/>
+        <circle cx="775" cy="555" r="9" fill="#FFFFFF" opacity="0.9"/><circle cx="775" cy="555" r="4" fill="#FFD34D"/>
+        <circle cx="90" cy="480" r="7" fill="#FFFFFF" opacity="0.75"/><circle cx="90" cy="480" r="3" fill="#FFD34D"/>
+        <circle cx="915" cy="475" r="7" fill="#FFFFFF" opacity="0.75"/><circle cx="915" cy="475" r="3" fill="#FFD34D"/>
+        <circle cx="400" cy="590" r="8" fill="#FFFFFF" opacity="0.85"/><circle cx="400" cy="590" r="3.5" fill="#F2A9C4"/>
+        <circle cx="618" cy="575" r="8" fill="#FFFFFF" opacity="0.85"/><circle cx="618" cy="575" r="3.5" fill="#FFD34D"/>
+      </g>
+    </svg>
+  </div>
+);
+
+// ============================================================
+// ODDIY MAVZULI FONLAR (3-5-sahifalar) — manzarasiz, yengil:
+// yumshoq gradient + burchaklarda shaffof doiralar + sahifa mavzusiga
+// ishora qiluvchi juda och suvbelgi va siyrak bezaklar.
+// Diqqatni tortmaydi — o'yin kartalari yaqqol ajralib turadi.
+// ============================================================
+
+// 3-sahifa ("Xuddi shundayini top") foni — darsning TABIIY ThemeBg
+// tizimida: sahifaning O'Z o'yin narsalari (olma, yulduz, shar, mashina,
+// uzum, apelsin) chetlarda och siluet bo'lib turadi. Markaz bo'sh.
+const SAME_THEME = {
+  bg: 'linear-gradient(180deg, #EAF9E1 0%, #D9F2CB 55%, #C4E8AD 100%)',
+  decor: [
+    { kind: 'star5',   c: '#FFD34D', x: 7,  y: 12, s: 46, o: 0.4 },
+    { kind: 'apple',   c: '#FF5A4E', x: 27, y: 7,  s: 38, o: 0.35 },
+    { kind: 'balloon', c: '#5AC8FA', x: 52, y: 9,  s: 42, o: 0.35 },
+    { kind: 'orange',  c: '#FFB03A', x: 76, y: 7,  s: 36, o: 0.35 },
+    { kind: 'star5',   c: '#B48CE0', x: 94, y: 13, s: 40, o: 0.4 },
+    { kind: 'grape',   c: '#8E5AE8', x: 5,  y: 52, s: 38, o: 0.3 },
+    { kind: 'car',     c: '#F5C518', x: 95, y: 52, s: 44, o: 0.3 },
+    { kind: 'apple',   c: '#A8CC5A', x: 7,  y: 90, s: 36, o: 0.35 },
+    { kind: 'banana',  c: '#FFD34D', x: 28, y: 95, s: 38, o: 0.35 },
+    { kind: 'balloon', c: '#FF8FB3', x: 72, y: 94, s: 40, o: 0.35 },
+    { kind: 'star5',   c: '#43C465', x: 92, y: 91, s: 38, o: 0.4 },
+  ],
+};
+
+// 4-sahifa (meva saralash) foni — ThemeBg tizimida: sahifaning O'Z
+// mevalari (uzum, apelsin, olma + boshqa mevalar) chetlarda och siluet,
+// iliq sariq-krem gradient. Markaz bo'sh — qutilar va drag'ga xalaqit yo'q.
+const SORT_FRUITS_THEME = {
+  bg: 'linear-gradient(180deg, #FFF6D9 0%, #FBEFC6 55%, #F5E2AC 100%)',
+  decor: [
+    { kind: 'apple',  c: '#FF5A4E', x: 7,  y: 12, s: 42, o: 0.4 },
+    { kind: 'grape',  c: '#8E5AE8', x: 27, y: 7,  s: 40, o: 0.35 },
+    { kind: 'orange', c: '#FFB03A', x: 52, y: 9,  s: 40, o: 0.35 },
+    { kind: 'pear',   c: '#A8CC5A', x: 76, y: 7,  s: 38, o: 0.35 },
+    { kind: 'apple',  c: '#A8CC5A', x: 94, y: 13, s: 40, o: 0.4 },
+    { kind: 'banana', c: '#FFD34D', x: 5,  y: 52, s: 40, o: 0.3 },
+    { kind: 'orange', c: '#FFB03A', x: 95, y: 52, s: 38, o: 0.3 },
+    { kind: 'grape',  c: '#8E5AE8', x: 7,  y: 90, s: 38, o: 0.35 },
+    { kind: 'apple',  c: '#FF5A4E', x: 28, y: 95, s: 36, o: 0.35 },
+    { kind: 'pear',   c: '#A8CC5A', x: 72, y: 94, s: 38, o: 0.35 },
+    { kind: 'banana', c: '#FFD34D', x: 92, y: 91, s: 40, o: 0.4 },
+  ],
+};
+
+// 5-sahifa (o'yinchoq saralash) foni — sahifaning O'Z shakllari
+// (yulduz, kvadrat, doira + koptok, shar) chetlarda; och moviy gradient
+const SORT_TOYS_THEME = {
+  bg: 'linear-gradient(180deg, #E4F1FF 0%, #EDF0FF 55%, #DDE9FA 100%)',
+  decor: [
+    { kind: 'star5',   c: '#FFD34D', x: 7,  y: 12, s: 44, o: 0.4 },
+    { kind: 'dot',     c: '#4A90E2', x: 27, y: 7,  s: 34, o: 0.35 },
+    { kind: 'square',  c: '#FF5A4E', x: 52, y: 9,  s: 36, o: 0.35 },
+    { kind: 'balloon', c: '#FF8FB3', x: 76, y: 8,  s: 42, o: 0.35 },
+    { kind: 'star5',   c: '#B48CE0', x: 94, y: 13, s: 40, o: 0.4 },
+    { kind: 'ball',    c: '#43C465', x: 5,  y: 52, s: 38, o: 0.3 },
+    { kind: 'square',  c: '#5AC8FA', x: 95, y: 52, s: 34, o: 0.3 },
+    { kind: 'dot',     c: '#FFB03A', x: 7,  y: 90, s: 34, o: 0.35 },
+    { kind: 'star5',   c: '#43C465', x: 28, y: 95, s: 36, o: 0.35 },
+    { kind: 'ball',    c: '#FF5A4E', x: 72, y: 94, s: 36, o: 0.35 },
+    { kind: 'square',  c: '#FFD34D', x: 92, y: 91, s: 36, o: 0.4 },
+  ],
+};
+
+// 6-sahifa (ketma-ketlik: kuchukcha-jo'ja) foni — och osmon-yashil,
+// hayvonchalar yashaydigan muhit: quyosh, bulut, daraxt, gul, kapalak
+const SEQ_ANIM_THEME = {
+  bg: 'linear-gradient(180deg, #D8F1FF 0%, #E8F7E4 55%, #CFEDBD 100%)',
+  decor: [
+    { kind: 'sun',       c: '#FFD34D', x: 7,  y: 12, s: 52, o: 0.45 },
+    { kind: 'cloud',     c: '#FFFFFF', x: 30, y: 7,  s: 52, o: 0.6 },
+    { kind: 'butterfly', c: '#F2A9C4', x: 55, y: 10, s: 30, o: 0.4 },
+    { kind: 'cloud',     c: '#FFFFFF', x: 78, y: 8,  s: 56, o: 0.55 },
+    { kind: 'tree',      c: '#43A047', x: 95, y: 15, s: 40, o: 0.35 },
+    { kind: 'tree',      c: '#43A047', x: 4,  y: 52, s: 42, o: 0.35 },
+    { kind: 'butterfly', c: '#B48CE0', x: 96, y: 54, s: 28, o: 0.35 },
+    { kind: 'flower',    c: '#F2A9C4', x: 7,  y: 91, s: 34, o: 0.4 },
+    { kind: 'flower',    c: '#FF5A4E', x: 30, y: 95, s: 30, o: 0.35 },
+    { kind: 'flower',    c: '#F6C45A', x: 71, y: 94, s: 30, o: 0.35 },
+    { kind: 'flower',    c: '#B06BFF', x: 93, y: 91, s: 32, o: 0.4 },
+  ],
+};
+
+// 7-sahifa (ketma-ketlik: doira-kvadrat) foni — sahifaning O'Z shakllari
+// (qizil doira, ko'k kvadrat) chetlarda; och binafsha-pushti gradient
+const SEQ_SHAPES_THEME = {
+  bg: 'linear-gradient(180deg, #F3EFFF 0%, #FDF1F7 55%, #ECE4FA 100%)',
+  decor: [
+    { kind: 'dot',    c: '#FF5A4E', x: 7,  y: 12, s: 36, o: 0.4 },
+    { kind: 'square', c: '#4A90E2', x: 27, y: 7,  s: 36, o: 0.35 },
+    { kind: 'dot',    c: '#FF5A4E', x: 52, y: 9,  s: 30, o: 0.3 },
+    { kind: 'square', c: '#4A90E2', x: 76, y: 8,  s: 32, o: 0.35 },
+    { kind: 'dot',    c: '#FF5A4E', x: 94, y: 13, s: 34, o: 0.4 },
+    { kind: 'square', c: '#4A90E2', x: 5,  y: 52, s: 30, o: 0.28 },
+    { kind: 'dot',    c: '#FF5A4E', x: 95, y: 52, s: 30, o: 0.28 },
+    { kind: 'square', c: '#4A90E2', x: 7,  y: 90, s: 34, o: 0.35 },
+    { kind: 'dot',    c: '#FF5A4E', x: 28, y: 95, s: 30, o: 0.35 },
+    { kind: 'square', c: '#4A90E2', x: 72, y: 94, s: 32, o: 0.35 },
+    { kind: 'dot',    c: '#FF5A4E', x: 92, y: 91, s: 34, o: 0.4 },
+  ],
+};
+
+// Yarim-realistik quyon — tabiiy kulrang-jigarrang jun (gradient + jun
+// shtrixlari), pushti quloq ichi, yiltiroq qora ko'z, nozik mo'ylovlar,
+// paxmoq oq dum, tabiiy o'tirgan holat, ostida kontakt soyasi.
+// sil=true — butun figura yaxlit quyuq soya (karta varianti uchun);
+// soya konturlari qahramon bilan AYNAN bir xil bo'ladi.
+const RealRabbit = ({ sil = false, silColor = LL_SIL }) => {
+  const c = (col) => (sil ? silColor : col);
+  const B = sil ? silColor : 'url(#d1rbBody)';
+  const H = sil ? silColor : 'url(#d1rbHead)';
+  return (
+    <svg viewBox="0 0 260 240" className="d1-llc" aria-hidden="true">
+      {!sil && (
+        <defs>
+          <linearGradient id="d1rbBody" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#C7B7A2"/>
+            <stop offset="0.55" stopColor="#AC9A84"/>
+            <stop offset="1" stopColor="#93806B"/>
+          </linearGradient>
+          <linearGradient id="d1rbHead" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#CFC0AB"/>
+            <stop offset="1" stopColor="#A5927C"/>
+          </linearGradient>
+        </defs>
+      )}
+      {/* kontakt soyasi — o't ustida */}
+      {!sil && <ellipse cx="132" cy="222" rx="98" ry="14" fill="rgba(47, 84, 28, 0.16)"/>}
+      {!sil && <ellipse cx="132" cy="221" rx="80" ry="11" fill="rgba(47, 84, 28, 0.24)"/>}
+      {/* uzoq quloq (orqada, quyuqroq) */}
+      <ellipse cx="155" cy="40" rx="11" ry="37" fill={c('#98866F')} transform="rotate(-16 155 40)"/>
+      {!sil && <ellipse cx="155" cy="44" rx="5.5" ry="27" fill="#C9A7B2" opacity="0.7" transform="rotate(-16 155 44)"/>}
+      {/* paxmoq oq dum */}
+      <circle cx="47" cy="170" r="16" fill={c('#F4F0E7')}/>
+      {!sil && <circle cx="43" cy="165" r="8" fill="#FFFFFF"/>}
+      {/* katta orqa son */}
+      <ellipse cx="96" cy="162" rx="62" ry="58" fill={B} transform="rotate(-6 96 162)"/>
+      {/* oldinga cho'zilgan orqa panja */}
+      <ellipse cx="126" cy="215" rx="36" ry="11" fill={c('#9E8B75')}/>
+      {/* gavda-ko'krak */}
+      <ellipse cx="152" cy="148" rx="46" ry="58" fill={B} transform="rotate(10 152 148)"/>
+      {/* son ustidagi yumshoq quyuq qavat */}
+      {!sil && <ellipse cx="88" cy="178" rx="42" ry="34" fill="#8A7863" opacity="0.45"/>}
+      {/* krem ko'krak-qorincha */}
+      <ellipse cx="164" cy="172" rx="20" ry="28" fill={c('#E9E0CF')}/>
+      {/* oldingi oyoqlar + panjalar */}
+      <rect x="149" y="178" width="15" height="40" rx="7" fill={c('#A5927C')}/>
+      <rect x="176" y="176" width="15" height="42" rx="7" fill={c('#AC9A84')}/>
+      <ellipse cx="158" cy="218" rx="13" ry="7.5" fill={c('#B4A28C')}/>
+      <ellipse cx="186" cy="217" rx="13" ry="7.5" fill={c('#B4A28C')}/>
+      {/* yaqin quloq — ichida pushti */}
+      <ellipse cx="187" cy="32" rx="13" ry="41" fill={H} transform="rotate(8 187 32)"/>
+      {!sil && <ellipse cx="187" cy="37" rx="7" ry="30" fill="#EFB9C7" transform="rotate(8 187 37)"/>}
+      {!sil && <ellipse cx="187" cy="37" rx="3.4" ry="24" fill="#E39DB0" opacity="0.6" transform="rotate(8 187 37)"/>}
+      {/* bosh */}
+      <ellipse cx="176" cy="86" rx="33" ry="30" fill={H}/>
+      {/* tumshuq */}
+      <ellipse cx="197" cy="99" rx="15" ry="13" fill={c('#C7B7A2')}/>
+      {!sil && <ellipse cx="197" cy="104" rx="10" ry="7" fill="#E9E0CF"/>}
+      {!sil && (
+        <g>
+          {/* jun shtrixlari — son, ko'krak va boshda */}
+          <g stroke="#8A7863" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.4">
+            <path d="M62 140 q4 7 0 13"/><path d="M76 128 q4 7 0 13"/><path d="M92 122 q4 7 0 13"/>
+            <path d="M70 168 q4 7 0 13"/><path d="M56 158 q4 6 0 12"/><path d="M86 150 q4 7 0 13"/>
+            <path d="M108 138 q4 7 0 13"/><path d="M100 176 q4 6 0 12"/>
+            <path d="M160 64 q4 6 0 11"/><path d="M172 58 q4 6 0 11"/>
+            <path d="M138 120 q4 6 0 12"/><path d="M146 104 q4 6 0 12"/>
+          </g>
+          <g stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.4">
+            <path d="M160 158 q3 6 0 11"/><path d="M167 148 q3 6 0 11"/><path d="M170 186 q3 5 0 10"/>
+          </g>
+          {/* yumshoq nur — tepadan iliq yorug'lik aksi */}
+          <ellipse cx="150" cy="52" rx="92" ry="40" fill="#FFF6D9" opacity="0.16"/>
+          {/* ko'z — yiltiroq qora, nur nuqtasi bilan */}
+          <circle cx="180" cy="80" r="7.4" fill="#33291F"/>
+          <circle cx="183" cy="77" r="2.5" fill="#FFFFFF"/>
+          <circle cx="178" cy="83" r="1.1" fill="#FFFFFF" opacity="0.6"/>
+          {/* pushti burun + og'iz */}
+          <path d="M204 91 q6 -2 9 2 q-1 6 -7 6 q-5 -3 -2 -8 Z" fill="#D89AAC"/>
+          <path d="M208 99 q-2 6 -10 6" stroke="#8F7F6A" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
+          {/* nozik mo'ylovlar */}
+          <g stroke="#B9AC97" strokeWidth="1.7" strokeLinecap="round" opacity="0.9">
+            <line x1="206" y1="98" x2="236" y2="90"/>
+            <line x1="207" y1="102" x2="238" y2="101"/>
+            <line x1="205" y1="106" x2="234" y2="112"/>
+            <line x1="188" y1="100" x2="166" y2="96"/>
+            <line x1="188" y1="104" x2="167" y2="105"/>
+          </g>
+        </g>
+      )}
+    </svg>
+  );
+};
+
+// Kartadagi soyalar. Soya rangi QORA EMAS — o'tloqqa mos yumshoq
+// to'q moviy-binafsha (kechki soya tusi). UCHALASI ham bir uslubda:
+// haqiqiy hayvon qiyofasi, YONBOSHDAN (quyon soyasi bilan uyg'un) —
+// mushuk 4 oyoqli o'tirgan holatda, xo'roz tabiiy 2 oyoqli qush shaklida.
+const MEADOW_SIL = '#4E5490';
+
+// O'tirgan mushuk — yonboshdan siluet: katta orqa son, oldingi 2 tik oyoq,
+// uchli quloqlar, uzun egilgan dum (haqiqiy mushuk soyasi kabi)
+const CatSilArt = ({ color = MEADOW_SIL }) => (
+  <svg viewBox="0 0 240 240" className="d1-llc" aria-hidden="true">
+    <g fill={color}>
+      {/* dum — yerda old tomonga o'ralgan */}
+      <path d="M56 214 Q16 212 12 182 Q10 160 30 156 Q24 178 40 190 Q50 198 68 200 Z"/>
+      {/* orqa son */}
+      <ellipse cx="78" cy="166" rx="52" ry="54"/>
+      {/* gavda-ko'krak (oldinga engashgan) */}
+      <ellipse cx="128" cy="148" rx="40" ry="50" transform="rotate(10 128 148)"/>
+      {/* oldingi tik oyoqlar */}
+      <rect x="120" y="150" width="17" height="68" rx="8"/>
+      <rect x="147" y="152" width="17" height="66" rx="8"/>
+      {/* panjalar */}
+      <ellipse cx="102" cy="218" rx="28" ry="8"/>
+      <ellipse cx="130" cy="219" rx="13" ry="6.5"/>
+      <ellipse cx="157" cy="219" rx="13" ry="6.5"/>
+      {/* bosh */}
+      <circle cx="158" cy="80" r="34"/>
+      {/* uchli quloqlar */}
+      <path d="M134 60 L122 20 L158 42 Z"/>
+      <path d="M176 46 L198 14 L200 52 Z"/>
+      {/* tumshuqcha */}
+      <ellipse cx="190" cy="92" rx="13" ry="10"/>
+    </g>
+  </svg>
+);
+
+// Xo'roz — yonboshdan siluet: katta yoy dum patlari, tik bo'yin, tojli
+// bosh, tumshuq, soqolcha va 2 ta tabiiy oyoq-panja
+const RoosterSilArt = ({ color = MEADOW_SIL }) => (
+  <svg viewBox="0 0 240 240" className="d1-llc" aria-hidden="true">
+    <g fill={color}>
+      {/* dum patlari — orqaga yoyilgan yoy */}
+      <path d="M66 130 Q22 92 34 48 Q58 76 80 104 Z"/>
+      <path d="M60 146 Q10 128 10 84 Q44 106 72 128 Z"/>
+      <path d="M62 162 Q16 166 4 132 Q44 138 68 150 Z"/>
+      {/* tana */}
+      <ellipse cx="110" cy="158" rx="56" ry="44" transform="rotate(-8 110 158)"/>
+      {/* bo'yin-ko'krak */}
+      <path d="M118 134 Q128 90 148 64 L176 86 Q168 126 152 156 Z"/>
+      {/* bosh */}
+      <circle cx="160" cy="64" r="24"/>
+      {/* toj */}
+      <circle cx="148" cy="38" r="8"/>
+      <circle cx="160" cy="32" r="9"/>
+      <circle cx="172" cy="38" r="8"/>
+      {/* tumshuq */}
+      <path d="M182 58 L204 68 L182 78 Z"/>
+      {/* soqolcha */}
+      <ellipse cx="174" cy="92" rx="8" ry="12"/>
+      {/* oyoqlar */}
+      <rect x="96" y="196" width="9" height="26" rx="4"/>
+      <rect x="122" y="198" width="9" height="24" rx="4"/>
+      {/* panjalar */}
+      <path d="M86 222 q4 -4 12 -3 l10 1 q4 1 4 4 l0 2 l-26 0 Z"/>
+      <path d="M112 224 q4 -4 12 -3 l10 1 q4 1 4 4 l0 1 l-26 0 Z"/>
+    </g>
+  </svg>
+);
+
+const MeadowSil = ({ kind }) => (
+  kind === 'rabbit' ? <RealRabbit sil silColor={MEADOW_SIL}/>
+    : kind === 'cat' ? <CatSilArt/>
+    : <RoosterSilArt/>
+);
+
+// 2-sahifa DOIM BIR XIL: qahramon — quyon; soyalar chapdan-o'ngga:
+// mushuk, xo'roz, quyon. Aralashtirish YO'Q (barcha bolalar uchun bir xil).
+const MEADOW_OPTIONS = [
+  { id: 'cat', correct: false },
+  { id: 'rooster', correct: false },
+  { id: 'rabbit', correct: true },
+];
+
+const MeadowShadowPage = ({ onBack, onNext }) => {
+  const voice = useVoice(SHADOW_CAT_VOICE);
+  const { onCorrect } = useFlightApi();
+  const [solved, setSolved] = useState(false);
+  const [shaking, shake] = useShake();
+
+  const pick = (item, el) => {
+    if (solved) return;
+    if (item.correct) {
+      setSolved(true);
+      sfxDingDing();
+      const r = el.getBoundingClientRect();
+      onCorrect({ x: r.left + r.width / 2, y: r.top + r.height / 2 }, true);
+    } else {
+      shake();
+    }
+  };
+
+  return (
+    <PageShell onBack={onBack} onNext={onNext} nextOk={solved}>
+      <div className={`d1-shadow-card themed meadow ${shaking ? 'd1-shake' : ''}`}>
+        <MeadowBg/>
+        <div className="d1-shadow-hero">
+          <RealRabbit/>
+        </div>
+        <div className="d1-shadow-row">
+          {MEADOW_OPTIONS.map((item) => {
+            const hit = solved && item.correct;
+            return (
+              <div key={item.id} className="d1-slotwrap">
+                <button type="button" className={`d1-sil ${hit ? 'ok' : ''}`} disabled={solved}
+                  onClick={(e) => pick(item, e.currentTarget)} aria-label="Soya varianti">
+                  <MeadowSil kind={item.id}/>
+                  {hit && <ConfettiBurst/>}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+        <PageVoice voice={voice}/>
+      </div>
+    </PageShell>
+  );
 };
 const SHADOW_CFG_BUNNY = {
   voice: "Bu do'stimiz soyasini yo'qotib qo'ydi. Mos soyani topib bosing!",
@@ -1574,8 +2395,9 @@ const ColorSortPage = ({ cfg, onBack, onNext }) => {
 
   return (
     <PageShell onBack={onBack} onNext={onNext} nextOk={allDone}>
-      <div className={`d1-shadow-card d1-sort-card ${cfg.theme ? 'themed' : ''}`}>
-        {cfg.theme && <ThemeBg theme={cfg.theme}/>}
+      <div className={`d1-shadow-card d1-sort-card ${cfg.theme || cfg.bgc ? 'themed' : ''}`}>
+        {/* bgc — to'liq manzarali fon komponenti; bo'lmasa dekor-belgili tema */}
+        {cfg.bgc ? <cfg.bgc/> : (cfg.theme && <ThemeBg theme={cfg.theme}/>)}
         {/* rangli qutilar — narsa shu yerga OLIB KELIB tashlanadi */}
         <div className="d1-sort-boxes">
           {cfg.boxes.map((box) => {
@@ -1637,8 +2459,8 @@ const SORT_CFG_FRUITS = {
     { id: 'orange', kind: 'orange', color: '#FFB03A' },
     { id: 'apple',  kind: 'apple',  color: '#43C465' },
   ],
-  // sahifaning o'z mavzusiga mos fon
-  theme: FRUITS_THEME,
+  // sahifaning o'z mevalaridan yig'ilgan fon
+  theme: SORT_FRUITS_THEME,
 };
 const SORT_CFG_TOYS = {
   voice: "Har bir o'yinchoqni o'z rangidagi qutichaga joylashtiring!",
@@ -1649,8 +2471,8 @@ const SORT_CFG_TOYS = {
     { id: 'cube',     kind: 'square',   color: '#FF5A4E' },
     { id: 'circle',   kind: 'dot',      color: '#4A90E2' },
   ],
-  // sahifaning o'z mavzusiga mos fon
-  theme: TOYS_THEME,
+  // sahifaning o'z shakllaridan yig'ilgan fon
+  theme: SORT_TOYS_THEME,
 };
 
 // ============================================================
@@ -1735,12 +2557,13 @@ const SequencePage = ({ cfg, onBack, onNext }) => {
 
 const SEQ_CFG_ANIMALS = {
   voice: "Hayvonchalar navbat bilan kelyapti. So'roq o'rnida qaysi hayvoncha turadi? Topib bosing!",
-  // QAT'IY naqsh: kuchukcha va o'rdakcha almashib keladi; javob — kuchukcha
-  cycle: [{ kind: 'dog' }, { kind: 'duck' }],
-  options: [{ kind: 'duck' }, { kind: 'dog' }],
+  // QAT'IY naqsh: kuchukcha va jo'ja almashib keladi; javob — kuchukcha.
+  // HAYOTIY ko'rinish: yonboshdan, it 4 oyoqli (realDog/realDuck)
+  cycle: [{ kind: 'realDog' }, { kind: 'realDuck' }],
+  options: [{ kind: 'realDuck' }, { kind: 'realDog' }],
   len: 4,
-  // sahifaning o'z mavzusiga mos fon
-  theme: MEADOW_THEME,
+  // hayvonchalar muhiti: osmon-o'tloq, quyosh, daraxt, gullar
+  theme: SEQ_ANIM_THEME,
 };
 const SEQ_CFG_SHAPES = {
   voice: "Naqshga qarang: shakllar navbat bilan kelyapti. Keyingi shakl qaysi? Topib bosing!",
@@ -1748,25 +2571,44 @@ const SEQ_CFG_SHAPES = {
   cycle: [{ kind: 'dot', c: '#FF5A4E' }, { kind: 'square', c: '#4A90E2' }],
   options: [{ kind: 'square', c: '#4A90E2' }, { kind: 'dot', c: '#FF5A4E' }],
   len: 4,
-  // sahifaning o'z mavzusiga mos fon
-  theme: SHAPES_THEME,
+  // sahifaning o'z shakllaridan yig'ilgan fon
+  theme: SEQ_SHAPES_THEME,
 };
+// 18-sahifa foni — mashinachalar mavzusiga mos "shaharcha":
+// chetlarda uychalar, daraxtlar, mashinachalar, bulut va quyosh
+const SEQ_CARS_THEME = {
+  bg: 'linear-gradient(180deg, #E0F1FF 0%, #EDF4F7 55%, #DDE9EF 100%)',
+  decor: [
+    { kind: 'sun',   c: '#FFD34D', x: 7,  y: 12, s: 48, o: 0.45 },
+    { kind: 'cloud', c: '#FFFFFF', x: 28, y: 7,  s: 52, o: 0.65 },
+    { kind: 'house', c: '#F2A45E', x: 52, y: 9,  s: 44, o: 0.35 },
+    { kind: 'cloud', c: '#FFFFFF', x: 76, y: 8,  s: 56, o: 0.6 },
+    { kind: 'tree',  c: '#43A047', x: 94, y: 14, s: 40, o: 0.35 },
+    { kind: 'car',   c: '#43C465', x: 5,  y: 52, s: 44, o: 0.3 },
+    { kind: 'car',   c: '#B06BFF', x: 95, y: 52, s: 44, o: 0.3 },
+    { kind: 'house', c: '#5AC8FA', x: 7,  y: 90, s: 42, o: 0.35 },
+    { kind: 'tree',  c: '#43A047', x: 28, y: 95, s: 36, o: 0.35 },
+    { kind: 'car',   c: '#FF8FB3', x: 72, y: 94, s: 40, o: 0.35 },
+    { kind: 'house', c: '#F6C45A', x: 93, y: 91, s: 40, o: 0.35 },
+  ],
+};
+
 const SEQ_CFG_COLORS = {
-  voice: "Ranglar naqshiga qarang. Keyingi rang qaysi? Topib bosing!",
-  // QAT'IY naqsh: qizil-sariq-ko'k yuraklar; javob — ko'k yurak
+  voice: "Mashinachalar naqshiga qarang. Keyingi mashinacha qaysi rangda? Topib bosing!",
+  // QAT'IY naqsh: qizil-sariq-ko'k mashinachalar; javob — ko'k mashinacha
   cycle: [
-    { kind: 'heart', c: '#FF5A4E' },
-    { kind: 'heart', c: '#FFD34D' },
-    { kind: 'heart', c: '#4A90E2' },
+    { kind: 'car', c: '#FF5A4E' },
+    { kind: 'car', c: '#FFD34D' },
+    { kind: 'car', c: '#4A90E2' },
   ],
   options: [
-    { kind: 'heart', c: '#FFD34D' },
-    { kind: 'heart', c: '#4A90E2' },
-    { kind: 'heart', c: '#FF5A4E' },
+    { kind: 'car', c: '#FFD34D' },
+    { kind: 'car', c: '#4A90E2' },
+    { kind: 'car', c: '#FF5A4E' },
   ],
   len: 5,
-  // sahifaning o'z mavzusiga mos fon
-  theme: SHAPES_THEME,
+  // mashinachalar mavzusiga mos "shaharcha" foni
+  theme: SEQ_CARS_THEME,
 };
 
 // ============================================================
@@ -1936,6 +2778,127 @@ const DIFF_CFG_TOYS = {
   // o'yinchoqlar sahifasining O'ZIGA MOS foni (o'yin xonasi)
   theme: TOYS_THEME,
 };
+// ============================================================
+// SAHIFA 3 (yangi format) — XUDDI SHUNDAYINI TOP (namunaga qarab).
+// Sof diqqat mashqi, o'qish talab qilmaydi, boshqa darslarda YO'Q format:
+// tepada oltin ramkali NAMUNA kartochka (2 narsali rasm), pastda 4 ta
+// juda o'xshash variant — faqat BITTASI namuna bilan aynan bir xil,
+// qolganlarida bitta detal boshqacha (rang yoki narsaning o'zi almashgan).
+// 3 raund = 3 yulduz. Xato: butun ekran silkinadi + "hmm".
+// Oxirgi raund: markaziy yulduz + salyut + avto-o'tish (umumiy tizim).
+// ============================================================
+const SAME_VOICE = "Tepadagi namunaga diqqat bilan qarang. Pastdan xuddi shunday kartochkani topib bosing!";
+// 3 raund QAT'IY; to'g'ri javob o'rni har raundda boshqa joyda
+const SAME_ROUNDS = [
+  { // 1-raund: mevalar
+    sample: [{ kind: 'apple', c: '#FF5A4E' }, { kind: 'star5', c: '#FFD34D' }],
+    options: [
+      [{ kind: 'apple', c: '#FF5A4E' }, { kind: 'star5', c: '#5AC8FA' }],
+      [{ kind: 'apple', c: '#A8CC5A' }, { kind: 'star5', c: '#FFD34D' }],
+      [{ kind: 'apple', c: '#FF5A4E' }, { kind: 'star5', c: '#FFD34D' }],
+      [{ kind: 'pear',  c: '#A8CC5A' }, { kind: 'star5', c: '#FFD34D' }],
+    ],
+    correct: 2,
+  },
+  { // 2-raund: mashina va havo shari
+    sample: [{ kind: 'car', c: '#FF5A4E' }, { kind: 'balloon', c: '#5AC8FA' }],
+    options: [
+      [{ kind: 'car', c: '#FF5A4E' }, { kind: 'gift',    c: '#5AC8FA' }],
+      [{ kind: 'car', c: '#FF5A4E' }, { kind: 'balloon', c: '#5AC8FA' }],
+      [{ kind: 'car', c: '#4A90E2' }, { kind: 'balloon', c: '#5AC8FA' }],
+      [{ kind: 'car', c: '#FF5A4E' }, { kind: 'balloon', c: '#F2A9C4' }],
+    ],
+    correct: 1,
+  },
+  { // 3-raund: mevalar (o'tloq-bog' olamiga mos: uzum va apelsin)
+    sample: [{ kind: 'grape', c: '#8E5AE8' }, { kind: 'orange', c: '#FFB03A' }],
+    options: [
+      [{ kind: 'grape', c: '#8E5AE8' }, { kind: 'orange', c: '#FFB03A' }],
+      [{ kind: 'grape', c: '#A8CC5A' }, { kind: 'orange', c: '#FFB03A' }],
+      [{ kind: 'grape', c: '#8E5AE8' }, { kind: 'banana', c: '#FFD34D' }],
+      [{ kind: 'grape', c: '#8E5AE8' }, { kind: 'orange', c: '#A8CC5A' }],
+    ],
+    correct: 0,
+  },
+];
+
+const SamePicturePage = ({ onBack, onNext }) => {
+  const voice = useVoice(SAME_VOICE);
+  const { onCorrect } = useFlightApi();
+  const [round, setRound] = useState(0);
+  const [done, setDone] = useState(0);
+  const [okIdx, setOkIdx] = useState(null);
+  const [shaking, shake] = useShake();          // xatoda butun ekran silkinadi
+  const [shakeIdx, setShakeIdx] = useState(null);
+  const shakeTimer = useRef(null);
+  const nextTimer = useRef(null);
+  useEffect(() => () => { clearTimeout(shakeTimer.current); clearTimeout(nextTimer.current); }, []);
+
+  const allDone = done === SAME_ROUNDS.length;
+  const r = SAME_ROUNDS[round];
+
+  const pick = (i, el) => {
+    if (okIdx !== null || allDone) return;
+    if (i === r.correct) {
+      setOkIdx(i);
+      setDone(d => d + 1);
+      sfxDingDing();
+      const rect = el.getBoundingClientRect();
+      const last = round === SAME_ROUNDS.length - 1;
+      onCorrect({ x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }, last);
+      if (!last) {
+        nextTimer.current = setTimeout(() => { setRound(v => v + 1); setOkIdx(null); }, 1100);
+      }
+    } else {
+      shake();
+      setShakeIdx(null);
+      clearTimeout(shakeTimer.current);
+      requestAnimationFrame(() => {
+        setShakeIdx(i);
+        shakeTimer.current = setTimeout(() => setShakeIdx(null), 500);
+      });
+    }
+  };
+
+  return (
+    <PageShell onBack={onBack} onNext={onNext} nextOk={allDone}>
+      <div className={`d1-shadow-card themed ${shaking ? 'd1-shake' : ''}`}>
+        <ThemeBg theme={SAME_THEME}/>
+        <div key={round} className="d1-same-wrap fade-up">
+          {/* namuna — oltin ramkali kartochka, lupali belgisi bilan */}
+          <div className="d1-same-sample">
+            <span className="d1-same-lens" aria-hidden="true"><ObjIcon kind="lens"/></span>
+            {r.sample.map((it, j) => (
+              <span key={j} className="d1-same-ic big"><ObjIcon kind={it.kind} c={it.c}/></span>
+            ))}
+          </div>
+          {/* 4 variant */}
+          <div className="d1-same-opts">
+            {r.options.map((pair, i) => (
+              <button key={i} type="button"
+                className={`d1-same-opt ${okIdx === i ? 'ok' : ''} ${shakeIdx === i ? 'd1-shake' : ''}`}
+                disabled={okIdx !== null}
+                onClick={(e) => pick(i, e.currentTarget)} aria-label={`Variant ${i + 1}`}>
+                {pair.map((it, j) => (
+                  <span key={j} className="d1-same-ic"><ObjIcon kind={it.kind} c={it.c}/></span>
+                ))}
+                {okIdx === i && <ConfettiBurst/>}
+              </button>
+            ))}
+          </div>
+        </div>
+        {/* raundlar progressi */}
+        <div className="d1-diff-dots" aria-label={`${done} / ${SAME_ROUNDS.length} raund yakunlandi`}>
+          {SAME_ROUNDS.map((_, i) => (
+            <span key={i} className={`d1-diff-dot ${i < done ? 'on' : ''}`}>{i < done ? '✓' : ''}</span>
+          ))}
+        </div>
+        <PageVoice voice={voice}/>
+      </div>
+    </PageShell>
+  );
+};
+
 // SAHIFA 9 — SEHRLI FONAR (yengil variant, 6-7 yosh): o'ng rasmda "kech
 // kirgan" — yarim shaffof qorong'ilik, rasm xira ko'rinib turadi; barmoq
 // yurgizilganda katta fonar nuri ergashib, o'sha joyni yop-yorug' qiladi.
@@ -1956,7 +2919,7 @@ const DIFF_CFG_NIGHT = {
       { kind: 'cloud',    x: 82, y: 11, s: 18, c: '#8FA3D8' },
       { kind: 'house',    x: 76, y: 42, s: 30, c: '#F2A45E', alt: { c: '#E8EEF4' } },
       { kind: 'tree',     x: 11, y: 52, s: 30, c: '#2E7D4F', alt: { c: '#E8A63C' } },
-      { kind: 'cat',      x: 32, y: 72, s: 26, c: '#F2A45E', alt: { c: '#A8A8A8' } },
+      { kind: 'realCat',  x: 32, y: 72, s: 26, c: '#F2A45E', alt: { c: '#A8A8A8' } },
       { kind: 'mushroom', x: 56, y: 82, s: 20, c: '#FF5A4E', alt: { kind: 'flower' } },
       { kind: 'rabbit',   x: 89, y: 76, s: 20, c: '#EDE7DC' },
     ],
@@ -1979,7 +2942,7 @@ const DIFF_CFG_SPACE = {
       { kind: 'star5',  x: 86, y: 14, s: 13, c: '#FFF3C4' },
       { kind: 'planet', x: 78, y: 38, s: 30, c: '#3CE0C8', alt: { c: '#FF8FB3' } },
       { kind: 'rocket', x: 28, y: 52, s: 34, c: '#FF5A4E', alt: { c: '#43C465' } },
-      { kind: 'star5',  x: 55, y: 42, s: 15, c: '#FFD34D', alt: { kind: 'heart', c: '#FF5A8A' } },
+      { kind: 'star5',  x: 55, y: 42, s: 15, c: '#FFD34D', alt: { kind: 'comet' } },
       { kind: 'planet', x: 14, y: 80, s: 26, c: '#B06BFF' },
       { kind: 'moon',   x: 88, y: 74, s: 22, c: '#FFE9A8' },
       { kind: 'star5',  x: 60, y: 84, s: 15, c: '#FFD34D' },
@@ -2009,10 +2972,10 @@ const buildOddRounds = () => [
     { kind: 'pear',   c: '#A8CC5A' },
   ] },
   { items: [
-    { kind: 'cat',    c: '#F5A623' },
-    { kind: 'rabbit', c: '#C08552' },
-    { kind: 'car',    c: '#F5C518', odd: true },
-    { kind: 'dog',    c: '#C08552' },
+    { kind: 'realCat' },
+    { kind: 'realRabbit' },
+    { kind: 'car', c: '#F5C518', odd: true },
+    { kind: 'realDog' },
   ] },
   { items: [
     { kind: 'dot',    c: '#4A90E2' },
@@ -2027,8 +2990,24 @@ const buildOddRounds = () => [
     { kind: 'bear', c: '#C98A4B' },
   ] },
 ];
-// sahifaning o'z mavzusiga mos fon
-const ODDOUT_THEME = SHAPES_THEME;
+// sahifaning O'Z narsalaridan yig'ilgan fon (mevalar, o'yinchoqlar,
+// shakllar — o'yin raundlaridagi narsalarning och siluetlari)
+const ODDOUT_THEME = {
+  bg: 'linear-gradient(180deg, #FFF0E0 0%, #FFEAEE 55%, #F3E8FA 100%)',
+  decor: [
+    { kind: 'apple',  c: '#FF5A4E', x: 7,  y: 12, s: 40, o: 0.4 },
+    { kind: 'star5',  c: '#FFD34D', x: 27, y: 7,  s: 38, o: 0.35 },
+    { kind: 'ball',   c: '#4A90E2', x: 52, y: 9,  s: 36, o: 0.35 },
+    { kind: 'banana', c: '#FFD34D', x: 76, y: 8,  s: 40, o: 0.35 },
+    { kind: 'heart',  c: '#FF8FB3', x: 94, y: 13, s: 36, o: 0.4 },
+    { kind: 'pear',   c: '#A8CC5A', x: 5,  y: 52, s: 36, o: 0.3 },
+    { kind: 'dot',    c: '#43C465', x: 95, y: 52, s: 30, o: 0.3 },
+    { kind: 'square', c: '#5AC8FA', x: 7,  y: 90, s: 34, o: 0.35 },
+    { kind: 'ball',   c: '#FF5A4E', x: 28, y: 95, s: 34, o: 0.35 },
+    { kind: 'apple',  c: '#A8CC5A', x: 72, y: 94, s: 36, o: 0.35 },
+    { kind: 'star5',  c: '#B48CE0', x: 92, y: 91, s: 36, o: 0.4 },
+  ],
+};
 
 const OddOutPage = ({ onBack, onNext }) => {
   const voice = useVoice(ODDOUT_VOICE);
@@ -2115,12 +3094,12 @@ const CC_QUESTION = "Qaysi biri o'zgarib qoldi? Topib bosing!";
 // har doim och kulrang QUYONCHA QORA quyonchaga aylanadi
 // (qora quyonlar hayotda bor — rang haqiqiy, farq esa aniq ko'rinadi)
 const CC_ANIMALS = [
-  { id: 'rabbit', kind: 'rabbit' },
-  { id: 'cat',    kind: 'cat' },
-  { id: 'dog',    kind: 'dog' },
-  { id: 'cow',    kind: 'cow' },
+  { id: 'rabbit', kind: 'realRabbit' },
+  { id: 'cat',    kind: 'realCat' },
+  { id: 'dog',    kind: 'realDog' },
+  { id: 'cow',    kind: 'realCow' },
 ];
-const CC_SECRET = { id: 'rabbit', kind: 'rabbit', c: '#3A3A3A' };
+const CC_SECRET = { id: 'rabbit', kind: 'realRabbit', c: '#3A3A3A' };
 // o'tloq chetidagi bezaklar: quyosh, bulut, gullar, kapalak
 const CC_DECOR = [
   { kind: 'sun',       c: '#FFD34D', x: 8,  y: 16, s: 52, o: 0.55 },
@@ -2483,15 +3462,19 @@ const SwapShelfPage = ({ onBack, onNext }) => {
 // ============================================================
 // SANOQ KARTASI: toza oq kartada n dona BIR XIL mahsulot — orqa fonda
 // hech narsa yo'q, mahsulotlar to'liq ko'rinib turadi va sanash oson.
-const CountArt = ({ n, kind, c }) => (
-  <span className="d1-count-art">
-    <span className="d1-count-items">
-      {Array.from({ length: n }).map((_, i) => (
-        <span key={i}><ObjIcon kind={kind} c={c}/></span>
-      ))}
+// O'lcham mahsulot soniga qarab: kam bo'lsa KATTA, 5 ta bo'lsa sig'adigan.
+const CountArt = ({ n, kind, c }) => {
+  const w = n <= 2 ? '44%' : n <= 4 ? '40%' : '31%';
+  return (
+    <span className="d1-count-art">
+      <span className="d1-count-items">
+        {Array.from({ length: n }).map((_, i) => (
+          <span key={i} style={{ width: w }}><ObjIcon kind={kind} c={c}/></span>
+        ))}
+      </span>
     </span>
-  </span>
-);
+  );
+};
 
 const CountPage = ({ cfg, onBack, onNext }) => {
   const voice = useVoice(cfg.voice);
@@ -2613,25 +3596,58 @@ const FishPairPage = ({ onBack, onNext }) => {
   const voice = useVoice(FISH_VOICE);
   const { onCorrect } = useFlightApi();
   const fishes = FISH_FIXED;
-  const [slots, setSlots] = useState(() => Object.fromEntries(fishes.map((f, i) => [f.id, i])));
+  const [slots] = useState(() => Object.fromEntries(fishes.map((f, i) => [f.id, i])));
   const [sel, setSel] = useState(null);          // birinchi bosilgan baliq
   const [matched, setMatched] = useState({});    // id -> true
+  const [exits, setExits] = useState({});        // id -> { x, y, flip } — suzib ketish nishoni
   const [shakeIds, setShakeIds] = useState([]);
   const shakeTimer = useRef(null);
   useEffect(() => () => clearTimeout(shakeTimer.current), []);
 
+  // SUZISH DVIJOKI (JS): har baliq o'z maromida keng radiusda suzib yuradi.
+  // CSS emas, requestAnimationFrame — "reduced motion" sozlamasida ham ishlaydi.
+  const btnRefs = useRef({});
+  const exitsRef = useRef({});
+  useEffect(() => { exitsRef.current = exits; }, [exits]);
+  useEffect(() => {
+    let raf;
+    const t0 = performance.now();
+    const PH = [0, 1.3, 2.6, 3.9, 5.2, 6.5];   // har baliqning o'z fazasi
+    const loop = () => {
+      const t = (performance.now() - t0) / 1000;
+      fishes.forEach((f, i) => {
+        const el = btnRefs.current[f.id];
+        if (!el) return;
+        if (exitsRef.current[f.id]) {
+          // chiqib ketayotgan baliq — tez dum qoqib "shoshadi"
+          el.style.transform = `translate(-50%, -50%) rotate(${(Math.sin(t * 16 + i) * 5).toFixed(2)}deg)`;
+        } else {
+          const p = PH[i];
+          const dx = Math.sin(t * 0.45 + p) * 46 + Math.sin(t * 0.23 + p * 2) * 26;
+          const dy = Math.sin(t * 0.6 + p * 1.7) * 18 + Math.cos(t * 0.31 + p) * 10;
+          const rot = Math.sin(t * 0.5 + p) * 6;
+          el.style.transform = `translate(-50%, -50%) translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px) rotate(${rot.toFixed(2)}deg)`;
+        }
+      });
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
   const allDone = Object.keys(matched).length === 6;
 
-  // juft topilganda: ikkinchisi birinchisining yonidagi slotga suzib
-  // boradi (u yerdagi baliq bo'sh qolgan joyga o'tadi)
-  const swimTogether = (aId, bId) => {
-    setSlots(prev => {
-      const sa = prev[aId];
-      const target = sa % 3 === 2 ? sa - 1 : sa + 1;
-      if (prev[bId] === target) return prev;
-      const occupant = fishes.find(f => prev[f.id] === target).id;
-      return { ...prev, [bId]: target, [occupant]: prev[bId] };
-    });
+  // juft topildi: ikkalasi IKKI TOMONGA qarab tez suzib chiqib ketadi —
+  // chaproqdagisi chapga, o'ngroqdagisi o'ngga (yuzi ketish tomoniga qaraydi)
+  const swimAway = (aId, bId) => {
+    const ax = FISH_SLOTS[slots[aId]].x;
+    const bx = FISH_SLOTS[slots[bId]].x;
+    const [leftId, rightId] = ax <= bx ? [aId, bId] : [bId, aId];
+    setExits(prev => ({
+      ...prev,
+      [leftId]:  { x: -24, y: FISH_SLOTS[slots[leftId]].y + 8,  flip: false },
+      [rightId]: { x: 124, y: FISH_SLOTS[slots[rightId]].y - 8, flip: true },
+    }));
   };
 
   const pick = (f, el) => {
@@ -2643,7 +3659,7 @@ const FishPairPage = ({ onBack, onNext }) => {
       const next = { ...matched, [sel]: true, [f.id]: true };
       setMatched(next);
       setSel(null);
-      swimTogether(sel, f.id);
+      swimAway(sel, f.id);
       sfxDingDing();
       const r = el.getBoundingClientRect();
       onCorrect({ x: r.left + r.width / 2, y: r.top + r.height / 2 }, Object.keys(next).length === 6);
@@ -2662,7 +3678,7 @@ const FishPairPage = ({ onBack, onNext }) => {
 
   return (
     <PageShell onBack={onBack} onNext={onNext} nextOk={allDone}>
-      <div className="d1-shadow-card themed">
+      <div className="d1-shadow-card themed d1-fish-card">
         {/* dengiz tubi foni: gradient + qum + suv o'tlari + pufakchalar */}
         <div className="d1-sea-bg" aria-hidden="true">
           <span className="d1-sea-sand"/>
@@ -2679,14 +3695,20 @@ const FishPairPage = ({ onBack, onNext }) => {
           ))}
         </div>
         <div className="d1-fish-scene">
-          {fishes.map((f) => {
+          {fishes.map((f, i) => {
             const s = FISH_SLOTS[slots[f.id]];
+            const ex = exits[f.id];
+            const flip = ex ? ex.flip : i % 2 === 1;
             return (
               <button key={f.id} type="button"
-                className={`d1-fish ${matched[f.id] ? 'ok' : ''} ${sel === f.id ? 'sel' : ''} ${shakeIds.includes(f.id) ? 'd1-shake' : ''}`}
-                style={{ left: `${s.x}%`, top: `${s.y}%` }}
+                ref={(el) => { btnRefs.current[f.id] = el; }}
+                className={`d1-fish ${matched[f.id] ? 'ok' : ''} ${ex ? 'away' : ''} ${sel === f.id ? 'sel' : ''} ${shakeIds.includes(f.id) ? 'd1-shake' : ''}`}
+                style={{ left: `${ex ? ex.x : s.x}%`, top: `${ex ? ex.y : s.y}%` }}
                 onClick={(e) => pick(f, e.currentTarget)} aria-label="baliqcha">
-                <ObjIcon kind={f.kind}/>
+                {/* har xil tomonga qaragan baliqlar; ketayotganda yuzi yo'nalishga qaraydi */}
+                <span className={`d1-fish-inner ${flip ? 'flip' : ''}`}>
+                  <ObjIcon kind={f.kind}/>
+                </span>
               </button>
             );
           })}
@@ -2711,7 +3733,7 @@ const FishPairPage = ({ onBack, onNext }) => {
 const DUCK_VOICE = "Uchta o'rdakcha berkinib oldi. Ularni topib bosing!";
 // kichkina sariq o'rdakcha; sil=true — kulrang siluet (hisob qatori uchun)
 const DuckArt = ({ sil }) => (
-  <ObjIcon kind="duck" style={sil ? { filter: 'grayscale(1) opacity(0.55)' } : null}/>
+  <ObjIcon kind="rubberduck" style={sil ? { filter: 'grayscale(1) opacity(0.55)' } : null}/>
 );
 // katta ochiq o'yinchoq qutisi
 const ToyBoxSVG = () => <ObjIcon kind="box"/>;
@@ -2948,15 +3970,10 @@ const CertificatePage = ({ stars, total, onReplay, onBack }) => {
       </div>
       {/* guvohnoma kartasi */}
       <div className="d1-cert">
-        <p className="d1-cert-eyebrow">✦ DIQQAT CHEMPIONI — 1-daraja ✦</p>
         <h1 className="d1-cert-title">Tabriklaymiz!</h1>
         <div className="d1-cert-fox">
           <FoxSVG mood="cheer"/>
           <span className="d1-cert-medal"><MedalSVG/></span>
-        </div>
-        <div className="d1-cert-name">
-          <span className="d1-cert-name-label">Ism:</span>
-          <span className="d1-cert-name-line"/>
         </div>
         <div className="d1-cert-stars">
           <span className="d1-cert-star"><GoldStar/></span>
@@ -2979,7 +3996,7 @@ const CertificatePage = ({ stars, total, onReplay, onBack }) => {
 
 // ============================================================
 // ILDIZ KOMPONENT — 21 sahifa (spets: 1_darslik.pdf / .md):
-//  0 Muqova · 1 Soya-mushukcha · 2 Soya-quyoncha · 3 Saralash-meva ·
+//  0 Muqova · 1 Soya-quyoncha · 2 Xuddi-shundayini-top · 3 Saralash-meva ·
 //  4 Saralash-o'yinchoq · 5 Ketma-ketlik-hayvon · 6 Ketma-ketlik-shakl ·
 //  7-9 Farq-top (o'yinchoq/bog'/o'rmon) · 10 Motivatsiya · 11 Yodlash-savat ·
 //  12 Sanoq-pitsa · 13 Sanoq-konfet · 14 Juftini-top (baliqchalar) ·
@@ -2990,8 +4007,8 @@ const CertificatePage = ({ stars, total, onReplay, onBack }) => {
 // advance=true bo'lsa qisqa pauzadan keyin avto-o'tish.
 // ============================================================
 // Har sahifada nechta yulduz olish mumkin (qayta yechishda ortmasin)
-const PAGE_MAX = { 1: 1, 2: 1, 3: 3, 4: 3, 5: 1, 6: 1, 7: 3, 8: 4, 9: 1, 10: 0, 11: 1, 12: 3, 13: 3, 14: 3, 15: 4, 16: 3, 17: 1, 18: 2, 19: 4, 20: 0 };
-const TOTAL_STARS = Object.values(PAGE_MAX).reduce((a, b) => a + b, 0); // 42
+const PAGE_MAX = { 1: 1, 2: 3, 3: 3, 4: 3, 5: 1, 6: 1, 7: 3, 8: 4, 9: 1, 10: 0, 11: 1, 12: 3, 13: 3, 14: 3, 15: 4, 16: 3, 17: 1, 18: 2, 19: 4, 20: 0 };
+const TOTAL_STARS = Object.values(PAGE_MAX).reduce((a, b) => a + b, 0); // 44
 const LAST_PAGE = 20;
 
 export default function Dars01({ ttsApiBase, voiceGender, onFinished }) {
@@ -3001,6 +4018,7 @@ export default function Dars01({ ttsApiBase, voiceGender, onFinished }) {
   const [stars, setStars] = useState(0);
   const [flight, setFlight] = useState(null);   // { x, y, phase:'init'|'pop'|'go', tx, ty }
   const [bump, setBump] = useState(false);
+  const [celeb, setCeleb] = useState(false);    // sahifa yechildi bayrami (markaziy yulduz + salyut)
   const counterRef = useRef(null);
   const timersRef = useRef([]);
   const pageRef = useRef(0);
@@ -3009,12 +4027,24 @@ export default function Dars01({ ttsApiBase, voiceGender, onFinished }) {
   useEffect(() => () => timersRef.current.forEach(clearTimeout), []);
   const later = (fn, ms) => { timersRef.current.push(setTimeout(fn, ms)); };
 
-  // Yulduz parvozi: pt — bosilgan nuqta. MUHIM: sahifa AVTO-O'TMAYDI —
-  // bola faqat "Keyingi" tugmasini bosgandagina keyingi sahifaga o'tadi.
-  const startFlight = useCallback((pt) => {
+  // Yulduz parvozi: pt — bosilgan nuqta.
+  // solved=true (sahifadagi OXIRGI to'g'ri javob) — markaziy yulduz + salyut,
+  // bayram tugagach sahifa AVTOMATIK keyingisiga o'tadi ("Keyingi" tugmasi
+  // baribir qoladi — bola kutmasdan o'zi ham bosa oladi).
+  const startFlight = useCallback((pt, solved) => {
     // yulduz QAYSI sahifada topilgan bo'lsa — o'sha sahifa hisobiga yoziladi
     // (parvoz tugaguncha bola keyingi sahifaga o'tib ketsa ham adashmaydi)
     const startPage = pageRef.current;
+    if (solved) {
+      later(() => { setCeleb(true); sfxSalute(); }, 520);
+      later(() => setCeleb(false), 3000);
+      // avto-o'tish: bola hali shu sahifada bo'lsa (o'zi o'tib ketmagan bo'lsa)
+      later(() => {
+        if (pageRef.current === startPage) {
+          setPage(p => Math.min(LAST_PAGE, p + 1));
+        }
+      }, 3080);
+    }
     setFlight({ x: pt.x, y: pt.y, phase: 'init', tx: pt.x, ty: pt.y });
     later(() => setFlight(f => (f ? { ...f, phase: 'pop' } : f)), 30);
     later(() => {
@@ -3062,8 +4092,8 @@ export default function Dars01({ ttsApiBase, voiceGender, onFinished }) {
   const view = (() => {
     switch (page) {
       case 0:  return <CoverPage onStart={() => setPage(1)}/>;
-      case 1:  return <ShadowGamePage key={page} cfg={SHADOW_CFG_CAT} {...nav}/>;
-      case 2:  return <ShadowGamePage key={page} cfg={SHADOW_CFG_BUNNY} {...nav}/>;
+      case 1:  return <MeadowShadowPage key={page} {...nav}/>;
+      case 2:  return <SamePicturePage key={page} {...nav}/>;
       case 3:  return <ColorSortPage key={page} cfg={SORT_CFG_FRUITS} {...nav}/>;
       case 4:  return <ColorSortPage key={page} cfg={SORT_CFG_TOYS} {...nav}/>;
       case 5:  return <SequencePage key={page} cfg={SEQ_CFG_ANIMALS} {...nav}/>;
@@ -3107,13 +4137,9 @@ export default function Dars01({ ttsApiBase, voiceGender, onFinished }) {
           <div className="d1-topbar">
             <div className="d1-brand">
               <span className="d1-brand-fox"><FoxSVG mood="smile"/></span>
-              <span className="d1-brand-txt" aria-label="Zukko ko'zlar">
-                {"Zukko ko'zlar".split('').map((ch, i) => (
-                  <span key={i} className="d1-brand-ch" aria-hidden="true"
-                    style={{ animationDelay: `${i * 0.12}s` }}>
-                    {ch === ' ' ? ' ' : ch}
-                  </span>
-                ))}
+              <span className="d1-brand-txt">
+                <span className="d1-brand-t1">Zukko</span>
+                <span className="d1-brand-t2">ko'zlar</span>
               </span>
             </div>
             <div className="d1-top-right">
@@ -3136,6 +4162,9 @@ export default function Dars01({ ttsApiBase, voiceGender, onFinished }) {
             <GoldStar/>
           </span>
         )}
+
+        {/* sahifa yechildi — markaziy yulduz + salyut bayrami */}
+        {celeb && <CelebrationFx/>}
       </div>
     </FlightCtx.Provider>
   );
@@ -3207,27 +4236,21 @@ html, body { margin: 0; padding: 0; }
   white-space: nowrap;
 }
 .d1-brand { display: flex; align-items: center; gap: 8px; }
+/* LOGOTIP — tinch, professional: oq doira nishondagi tulkicha +
+   ikki rangli yozuv. Animatsiya YO'Q. */
 .d1-brand-fox {
-  width: clamp(34px, 5vw, 44px); display: inline-flex;
-  transform-origin: 50% 88%;
-  animation: d1foxbob 3s ease-in-out infinite;
+  width: clamp(36px, 5vw, 46px); height: clamp(36px, 5vw, 46px);
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #FFFFFF; border-radius: 50%;
+  box-shadow: 0 3px 10px rgba(122, 82, 48, 0.18);
+  padding: 4px;
 }
-@keyframes d1foxbob {
-  0%, 100% { transform: rotate(0deg) translateY(0); }
-  20%      { transform: rotate(-5deg) translateY(-2px); }
-  40%      { transform: rotate(3deg) translateY(0); }
-  60%      { transform: rotate(-2deg) translateY(-1px); }
-  80%      { transform: rotate(4deg) translateY(0); }
+.d1-brand-txt {
+  font-weight: 900; font-size: clamp(16px, 2.2vw, 20px);
+  letter-spacing: 0.01em; display: inline-flex; gap: 6px;
 }
-.d1-brand-txt { font-weight: 800; font-size: clamp(15px, 2.2vw, 19px); letter-spacing: 0.02em; }
-/* harflar navbat bilan mayin sakraydi (to'lqin) */
-.d1-brand-ch {
-  display: inline-block;
-  animation: d1chwave 3s ease-in-out infinite;
-}
-@keyframes d1chwave {
-  0%, 30%, 100% { transform: translateY(0); color: #3D3A50; }
-  10% { transform: translateY(-4px) scale(1.08); color: #E8703A; }
+.d1-brand-t1 { color: #3D3A50; }
+.d1-brand-t2 { color: #FF7043; }
   20% { transform: translateY(0.5px) scale(1); color: #3D3A50; }
 }
 .d1-counter {
@@ -3470,6 +4493,135 @@ html, body { margin: 0; padding: 0; }
     transform 0.8s ease-in;
 }
 
+/* ===== SAHIFA YECHILDI BAYRAMI: markaziy yulduz + salyut ===== */
+.d1-celeb {
+  position: fixed; inset: 0; z-index: 85;
+  pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+  animation: d1CelebFade 2.45s ease both;
+}
+@keyframes d1CelebFade {
+  0% { opacity: 1; }
+  78% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.d1-celeb-inner { position: relative; width: 0; height: 0; }
+.d1-celeb-rocket {
+  position: absolute;
+  width: 10px; height: 28px; border-radius: 6px;
+  opacity: 0;
+  box-shadow: 0 0 14px 4px var(--glow);
+  /* forwards: kechikish paytida KO'RINMAYDI (asos opacity 0) */
+  animation: d1CelebRocket 0.55s ease-out forwards;
+}
+.d1-celeb-rocket::after {
+  content: '';
+  position: absolute; left: 50%; top: 100%;
+  transform: translateX(-50%);
+  width: 4px; height: 52px; border-radius: 4px;
+  background: linear-gradient(180deg, var(--glow), transparent);
+  opacity: 0.85;
+}
+@keyframes d1CelebRocket {
+  0%   { transform: translate(-50%, calc(-50% + 58vh)) scaleY(1.25); opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translate(-50%, -50%) scaleY(1); opacity: 0; }
+}
+.d1-celeb-flash {
+  position: absolute;
+  width: 160px; height: 160px;
+  margin-left: -80px; margin-top: -80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #FFFDF0 0%, #FFE9A8 40%, rgba(255, 211, 77, 0) 70%);
+  opacity: 0; transform: scale(0.2);
+  animation: d1CelebFlash 0.65s ease-out forwards;
+}
+@keyframes d1CelebFlash {
+  0%   { opacity: 0; transform: scale(0.15); }
+  18%  { opacity: 1; }
+  100% { opacity: 0; transform: scale(3); }
+}
+.d1-celeb-txt {
+  position: absolute; left: 0; top: clamp(78px, 15vw, 118px);
+  transform: translateX(-50%);
+  font-weight: 900; font-size: clamp(26px, 5vw, 40px); color: #FF7043;
+  white-space: nowrap;
+  text-shadow: 0 3px 0 #FFFFFF, 0 8px 18px rgba(122, 82, 48, 0.35);
+  animation: d1CelebTxt 2.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes d1CelebTxt {
+  0%, 20% { transform: translateX(-50%) scale(0); opacity: 0; }
+  38% { transform: translateX(-50%) scale(1.15); opacity: 1; }
+  50%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+.d1-celeb-burst { position: absolute; width: 0; height: 0; }
+.d1-celeb-burst i {
+  position: absolute; left: 0; top: 0;
+  width: 18px; height: 18px; border-radius: 50%;
+  opacity: 0;
+  box-shadow: 0 0 14px 4px rgba(255, 236, 160, 0.6);
+  /* forwards: portlashgacha ko'rinmaydi — "kutayotgan nuqta" bo'lmaydi */
+  animation: d1CelebP 1.3s ease-out forwards;
+}
+@keyframes d1CelebP {
+  0%  { transform: translate(0, 0) scale(1.2); opacity: 1; }
+  70% { opacity: 1; }
+  /* uchqun yoyilib, oxirida og'irlik bilan pastga tushadi */
+  100% { transform: translate(var(--bx), calc(var(--by) + 70px)) scale(0.25); opacity: 0; }
+}
+
+/* ===== XUDDI SHUNDAYINI TOP (namuna + 4 variant) ===== */
+.d1-same-wrap {
+  position: relative; z-index: 2;
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: clamp(12px, 3vh, 30px);
+  padding: clamp(8px, 2vh, 18px) 12px;
+}
+.d1-same-sample {
+  position: relative;
+  display: flex; align-items: center; gap: clamp(10px, 2vw, 20px);
+  background: #FFFDF6;
+  border: 4px solid #FFD34D;
+  outline: 3px solid #E8A21F;
+  border-radius: 24px;
+  padding: clamp(10px, 2.2vh, 20px) clamp(22px, 3.5vw, 38px);
+  box-shadow: 0 10px 26px rgba(122, 82, 48, 0.24);
+}
+.d1-same-lens {
+  position: absolute; top: -20px; left: -22px;
+  width: clamp(38px, 6vh, 52px); height: clamp(38px, 6vh, 52px);
+  filter: drop-shadow(0 3px 6px rgba(61, 58, 80, 0.3));
+}
+.d1-same-ic {
+  position: relative; display: block;
+  width: clamp(44px, 8vh, 78px); aspect-ratio: 1;
+}
+.d1-same-ic.big { width: clamp(58px, 11vh, 104px); }
+.d1-same-opts {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: clamp(10px, 1.8vw, 20px);
+}
+.d1-same-opt {
+  position: relative;
+  display: flex; align-items: center; gap: clamp(6px, 1vw, 12px);
+  background: #FFFFFF;
+  border: 4px solid #B9E3B0;
+  border-radius: 20px;
+  padding: clamp(8px, 1.8vh, 16px) clamp(12px, 2vw, 20px);
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(61, 58, 80, 0.15);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.d1-same-opt:hover:not(:disabled) { transform: translateY(-3px) scale(1.03); }
+.d1-same-opt:disabled { cursor: default; }
+.d1-same-opt.ok {
+  border-color: #2FA45C;
+  background: #EAF9EF;
+  box-shadow: 0 6px 18px rgba(47, 164, 92, 0.35);
+}
+
 /* ===== SOYA TOPISH SAHIFASI (Format 3) ===== */
 .d1-shadow {
   flex: 1; min-height: 0;
@@ -3606,6 +4758,76 @@ html, body { margin: 0; padding: 0; }
   box-shadow: 0 clamp(6px, 1.1vh, 10px) 0 #D89A1D, 0 0 26px 6px rgba(255, 214, 90, 0.75);
 }
 
+/* ===== 2-SAHIFA: O'TLOQ USLUBI (yarim-realistik quyon) ===== */
+.d1-meadow-bg svg { display: block; width: 100%; height: 100%; }
+/* to'liq manzarali fonlar (mevali bog', bolalar xonasi) */
+.d1-scenebg svg { display: block; width: 100%; height: 100%; }
+/* 2-sahifa foni jonlantirishlari: bulut suzadi, qush va kapalak qanot qoqadi */
+.d1-md-cloud { animation: d1MdCloud 9s ease-in-out infinite alternate; }
+.d1-md-cloud.slow { animation-duration: 13s; animation-delay: -4s; }
+@keyframes d1MdCloud {
+  from { transform: translateX(-14px); }
+  to { transform: translateX(16px); }
+}
+.d1-md-btf { transform-box: fill-box; transform-origin: center; animation: d1MdBtf 3.6s ease-in-out infinite; }
+.d1-md-btf.b2 { animation-duration: 4.4s; animation-delay: -1.6s; }
+@keyframes d1MdBtf {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-11px) rotate(5deg); }
+}
+.d1-btf-wl, .d1-btf-wr { transform-box: fill-box; animation: d1BtfFlap 0.55s ease-in-out infinite alternate; }
+.d1-btf-wl { transform-origin: right center; }
+.d1-btf-wr { transform-origin: left center; }
+@keyframes d1BtfFlap {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0.5); }
+}
+/* dumaloq yashil taxta — oq ramka ichida (ramka tashqarisi d1-root gradienti) */
+.d1-shadow-card.meadow { background: #A9DB7E; }
+/* karta + orqasidagi slot konturi bitta ustunda turadi */
+.d1-slotwrap {
+  position: relative; z-index: 1;
+  flex: 1; max-width: 190px; min-width: 0;
+}
+.d1-slotwrap .d1-sil { width: 100%; max-width: none; }
+/* xira "javob shu yerga" slot konturi — karta orqasidan chiqib turadi */
+.d1-slot {
+  position: absolute;
+  left: 7%; right: 7%; top: clamp(-16px, -2vh, -10px); bottom: 40%;
+  border: 3px dashed rgba(255, 255, 255, 0.8);
+  border-radius: clamp(14px, 2vw, 20px);
+  background: rgba(255, 255, 255, 0.16);
+  pointer-events: none;
+}
+/* karta: oq ichlik + yashil ramka (dizayn: white cards, green borders) */
+.d1-shadow-card.themed.meadow .d1-sil {
+  background: #FFFFFF;
+  border: clamp(4px, 0.8vw, 7px) solid #58A83A;
+  border-radius: clamp(16px, 2.4vw, 24px);
+  box-shadow: 0 clamp(5px, 1vh, 8px) 0 #3F8526, 0 14px 24px -12px rgba(30, 70, 15, 0.45);
+  padding: clamp(8px, 1.6vh, 14px);
+}
+.d1-shadow-card.themed.meadow .d1-sil:not(:disabled):hover {
+  background: #FFFFFF;
+  transform: translateY(-3px);
+  box-shadow: 0 clamp(8px, 1.4vh, 11px) 0 #3F8526, 0 16px 26px -12px rgba(30, 70, 15, 0.45);
+}
+.d1-shadow-card.themed.meadow .d1-sil:not(:disabled):active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 #3F8526, 0 10px 16px -10px rgba(30, 70, 15, 0.45);
+}
+/* to'g'ri javob: yashil yorqin ramka (umumiy mexanika 1-bandi) */
+.d1-shadow-card.themed.meadow .d1-sil.ok {
+  background: #E0F6E8;
+  border-color: #2FA45C;
+  box-shadow: 0 clamp(5px, 1vh, 8px) 0 #237A44, 0 0 0 6px rgba(47, 164, 92, 0.3), 0 0 26px 6px rgba(80, 220, 130, 0.7);
+}
+/* quyonning o'z kontakt soyasi bor — umumiy drop-shadow filtri olib tashlanadi */
+.d1-shadow-card.meadow .d1-shadow-hero .d1-llc { filter: none; }
+@media (max-height: 720px) {
+  .d1-slotwrap { max-width: 150px; }
+}
+
 /* karnaycha karta ichida chap-pastda (spets: "chap pastda ovoz belgisi") */
 .d1-voice-btn.bl {
   position: absolute;
@@ -3696,7 +4918,7 @@ html, body { margin: 0; padding: 0; }
 /* ===== REDUCED MOTION ===== */
 @media (prefers-reduced-motion: reduce) {
   .d1-obj, .d1-cover-fox, .d1-final-fox, .d1-cover-cloud, .d1-cover-star,
-  .d1-brand-fox, .d1-brand-ch,
+  .d1-brand-fox,
   .d1-shake, .d1-counter.bump, .d1-rain i { animation: none !important; }
   .d1-voice-btn::before { animation: none !important; opacity: 0 !important; }
   .d1-burst i { animation-duration: 0.01s !important; }
@@ -4029,23 +5251,30 @@ html, body { margin: 0; padding: 0; }
 }
 .d1-fish {
   position: absolute; transform: translate(-50%, -50%);
-  width: clamp(100px, 18vh, 156px); aspect-ratio: 100 / 72;
+  width: clamp(130px, 24vh, 205px); aspect-ratio: 100 / 72;
   border: none; padding: clamp(5px, 1vh, 10px); cursor: pointer;
   background: transparent; border-radius: clamp(16px, 3vh, 26px);
   filter: drop-shadow(0 8px 12px rgba(20, 60, 90, 0.28));
   transition: left 0.8s cubic-bezier(0.45, 0, 0.25, 1), top 0.8s cubic-bezier(0.45, 0, 0.25, 1),
     background 0.25s, box-shadow 0.25s;
-  animation: d1fishbob 3s ease-in-out infinite;
 }
-.d1-fish:nth-child(2) { animation-delay: 0.5s; }
-.d1-fish:nth-child(3) { animation-delay: 1s; }
-.d1-fish:nth-child(4) { animation-delay: 1.5s; }
-.d1-fish:nth-child(5) { animation-delay: 2s; }
-.d1-fish:nth-child(6) { animation-delay: 2.5s; }
-@keyframes d1fishbob {
-  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-  50%      { transform: translate(-50%, -50%) translateY(-6px); }
+/* suzish harakati JS (requestAnimationFrame) orqali — reduced-motion
+   sozlamasida ham ishlaydi; CSS animatsiya ishlatilmaydi */
+/* juft topildi — IKKI TOMONGA tez suzib, fon chegarasidan chiqishda
+   asta yo'q bo'lib ketadi */
+.d1-fish.away {
+  transition:
+    left 1.5s cubic-bezier(0.5, 0, 0.85, 1),
+    top 1.5s cubic-bezier(0.5, 0, 0.85, 1),
+    opacity 0.7s ease 0.8s;
+  opacity: 0;
+  pointer-events: none;
 }
+/* baliq kartasi suzib chiqqan baliqlarni chetida qirqib tashlaydi */
+.d1-fish-card { overflow: hidden; }
+/* baliq ichki qatlami: har xil tomonga qarash uchun */
+.d1-fish-inner { display: block; width: 100%; height: 100%; position: relative; }
+.d1-fish-inner.flip { transform: scaleX(-1); }
 .d1-fish.sel {
   background: rgba(255, 255, 255, 0.45);
   box-shadow: 0 0 0 4px #FFB03A, 0 0 18px 2px rgba(255, 200, 90, 0.55);
@@ -4178,7 +5407,7 @@ html, body { margin: 0; padding: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   .d1-sort-item.sel, .d1-seq-q, .d1-mem-count, .d1-motiv-star, .d1-cert-medal, .d1-diff-dot.on,
-  .d1-count-card.active, .d1-num, .d1-sea-weed, .d1-sea-bubble, .d1-fish, .d1-seq-cell,
+  .d1-count-card.active, .d1-num, .d1-sea-weed, .d1-sea-bubble, .d1-seq-cell,
   .d1-shelf-toy, .d1-oddout-item, .d1-shadow-hero .d1-llc,
   .d1-nav-next:not(:disabled) { animation: none !important; }
 }
