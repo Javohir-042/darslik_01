@@ -1652,7 +1652,8 @@ const ThemeBg = ({ theme }) => (
     {theme.decor.map((d, i) => (
       <span key={i} className="d1-theme-ic"
         style={{
-          left: `${d.x}%`, top: `${d.y}%`,
+          // --dx: mobil CSS chetdagi belgichalarni karta ichiga surish uchun
+          left: `${d.x}%`, top: `${d.y}%`, '--dx': `${d.x}%`,
           width: `clamp(${Math.round(d.s * 0.6)}px, ${d.s / 7}vw, ${d.s}px)`,
           opacity: d.o,
           transform: `translate(-50%, -50%) rotate(${d.r || 0}deg)`,
@@ -3613,6 +3614,9 @@ const FishPairPage = ({ onBack, onNext }) => {
     let raf;
     const t0 = performance.now();
     const PH = [0, 1.3, 2.6, 3.9, 5.2, 6.5];   // har baliqning o'z fazasi
+    // MOBIL (<=600px): suzish radiusi kichraytiriladi — baliqlar tor kartadan
+    // chiqib ketmasin; keng ekranlarda (planshet/laptop) amp=1, o'zgarish yo'q
+    const amp = (typeof window !== 'undefined' && window.innerWidth <= 600) ? 0.3 : 1;
     const loop = () => {
       const t = (performance.now() - t0) / 1000;
       fishes.forEach((f, i) => {
@@ -3623,8 +3627,8 @@ const FishPairPage = ({ onBack, onNext }) => {
           el.style.transform = `translate(-50%, -50%) rotate(${(Math.sin(t * 16 + i) * 5).toFixed(2)}deg)`;
         } else {
           const p = PH[i];
-          const dx = Math.sin(t * 0.45 + p) * 46 + Math.sin(t * 0.23 + p * 2) * 26;
-          const dy = Math.sin(t * 0.6 + p * 1.7) * 18 + Math.cos(t * 0.31 + p) * 10;
+          const dx = (Math.sin(t * 0.45 + p) * 46 + Math.sin(t * 0.23 + p * 2) * 26) * amp;
+          const dy = (Math.sin(t * 0.6 + p * 1.7) * 18 + Math.cos(t * 0.31 + p) * 10) * amp;
           const rot = Math.sin(t * 0.5 + p) * 6;
           el.style.transform = `translate(-50%, -50%) translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px) rotate(${rot.toFixed(2)}deg)`;
         }
@@ -4014,7 +4018,12 @@ const LAST_PAGE = 20;
 export default function Dars01({ ttsApiBase, voiceGender, onFinished }) {
   configureLesson({ ttsApiBase: ttsApiBase || '', voiceGender: voiceGender || 'f' });
 
-  const [page, setPage] = useState(0);
+  // DEV/TEST: ?p=N bilan istalgan sahifadan boshlash (masalan /?p=7)
+  const [page, setPage] = useState(() => {
+    if (typeof window === 'undefined') return 0;
+    const n = parseInt(new URLSearchParams(window.location.search).get('p') || '0', 10);
+    return Number.isFinite(n) ? Math.min(LAST_PAGE, Math.max(0, n)) : 0;
+  });
   const [stars, setStars] = useState(0);
   const [flight, setFlight] = useState(null);   // { x, y, phase:'init'|'pop'|'go', tx, ty }
   const [bump, setBump] = useState(false);
@@ -5410,5 +5419,84 @@ html, body { margin: 0; padding: 0; }
   .d1-count-card.active, .d1-num, .d1-sea-weed, .d1-sea-bubble, .d1-seq-cell,
   .d1-shelf-toy, .d1-oddout-item, .d1-shadow-hero .d1-llc,
   .d1-nav-next:not(:disabled) { animation: none !important; }
+}
+
+/* ============================================================
+   MOBIL MOSLASHUV (<= 600px) — faqat telefonlar uchun.
+   Planshet (>= 768px) va laptoplarga MUTLAQO ta'sir qilmaydi:
+   barcha qoidalar shu bitta media-blok ichida.
+   ============================================================ */
+@media (max-width: 600px) {
+  /* --- MUQOVA: sarlavha karnaycha tugmasi ostida qolmasin --- */
+  .d1-cover-title { font-size: clamp(26px, 8.5vw, 40px); }
+  .d1-cover-top { padding-top: clamp(74px, 11vh, 96px); }
+
+  /* --- Karnaycha tugmalari telefonda ixchamroq --- */
+  .d1-voice-btn { width: clamp(40px, 11vw, 46px); }
+  .d1-voice-btn.bl { width: clamp(38px, 10.5vw, 44px); }
+
+  /* --- TEMATIK FON dekorlari: chetda yarim kesilib qolmasin ---
+     inline left o'rniga --dx (ThemeBg beradi) chekkadan 18px ichkariga
+     qisiladi; desktopda bu qoida ishlamaydi (media tashqarisida emas) */
+  .d1-theme-ic { left: clamp(18px, var(--dx, 50%), calc(100% - 18px)) !important; }
+
+  /* --- 2-SAHIFA (Xuddi shundayini top): kartalar 2x2 bo'lib sig'sin,
+     namuna yuqori panel ustiga chiqmasin, nuqtalar ko'rinsin --- */
+  .d1-same-wrap { gap: clamp(10px, 2vh, 16px); }
+  .d1-same-sample { padding: clamp(8px, 1.6vh, 14px) clamp(16px, 5vw, 26px); }
+  .d1-same-ic { width: clamp(32px, 11.5vw, 46px); }
+  .d1-same-ic.big { width: clamp(42px, 14vw, 58px); }
+  .d1-same-lens { top: -14px; left: -14px; width: 34px; height: 34px; }
+  .d1-same-opt { padding: clamp(7px, 1.4vh, 12px) clamp(10px, 3vw, 16px); }
+
+  /* --- FARQ-TOP (7, 8, 15): rasmlar yonma-yon emas, USTMA-UST —
+     har biri deyarli ikki baravar katta ko'rinadi --- */
+  .d1-diff-card .d1-pair { flex-direction: column; gap: 4px; }
+  .d1-diff-card .d1-panel {
+    flex: 1 1 0; min-height: 0;
+    width: auto; max-width: 100%;
+    aspect-ratio: 1 / 1.02;
+  }
+  .d1-diff-card .d1-vs { width: 28px; }
+
+  /* --- 11-SAHIFA (Yodlash-savat): 4 meva ekranga to'liq sig'sin --- */
+  .d1-mem-fruits { gap: clamp(6px, 2.2vw, 10px); }
+  .d1-mem-fruit { width: clamp(52px, 17vw, 72px); }
+  .d1-mem-basket { width: min(62vw, 240px); }
+  .d1-mem-count { font-size: clamp(52px, 18vw, 80px); }
+
+  /* --- 18-SAHIFA (Polka): 4 o'yinchoq ekranga to'liq sig'sin --- */
+  .d1-shelf-row { gap: clamp(8px, 2.6vw, 14px); padding: 0 4px; }
+  .d1-shelf-toy { width: clamp(48px, 16vw, 68px); }
+
+  /* --- 19-SAHIFA (Ortiqchasini top): ustun emas, 2x2 setka --- */
+  .d1-oddout-row {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
+    gap: clamp(10px, 3.4vw, 16px);
+  }
+  .d1-oddout-item { width: min(36vw, 150px); }
+
+  /* --- 12-13-SAHIFALAR (Sanoq): "?" belgisi mahsulotlarni to'smasin --- */
+  .d1-count-badge {
+    width: clamp(24px, 7.5vw, 30px);
+    font-size: clamp(13px, 4vw, 16px);
+    right: -5px; top: -5px;
+  }
+  .d1-count-row { gap: clamp(8px, 2.6vw, 12px); }
+
+  /* --- 14-SAHIFA (Baliqchalar): baliqlar tor kartada kichikroq —
+     chetga suzib yarim kesilib qolmaydi (JS amplituda ham kichraygan) --- */
+  .d1-fish { width: clamp(84px, 27vw, 110px); }
+
+  /* --- Variant qatorlari (savat/polka/sanoq javoblari) torroq gap --- */
+  .d1-seq-opts { gap: clamp(8px, 2.6vw, 14px); }
+  .d1-seq-opt { width: clamp(64px, 19vw, 88px); }
+  .d1-num { width: clamp(56px, 17vw, 76px); }
+
+  /* --- Umumiy: karta ichki maydonidan maksimal foydalanish --- */
+  .d1-shadow { padding-left: 10px; padding-right: 10px; }
+  .d1-shadow-card { padding-left: clamp(8px, 2.6vw, 14px); padding-right: clamp(8px, 2.6vw, 14px); }
 }
 `;
